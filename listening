@@ -1,0 +1,1058 @@
+src/core/nginx.c:     * init_cycle->log is required for signal handlers and
+src/core/nginx.c:                           cycle->conf_file.data);
+src/core/nginx.c:            cd = cycle->config_dump.elts;
+src/core/nginx.c:            for (i = 0; i < cycle->config_dump.nelts; i++) {
+src/core/nginx.c:    ngx_os_status(cycle->log);
+src/core/nginx.c:    ccf = (ngx_core_conf_t *) ngx_get_conf(cycle->conf_ctx, ngx_core_module);
+src/core/nginx.c:    if (ngx_init_signals(cycle->log) != NGX_OK) {
+src/core/nginx.c:        if (ngx_daemon(cycle->log) != NGX_OK) {
+src/core/nginx.c:    if (ngx_create_pidfile(&ccf->pid, cycle->log) != NGX_OK) {
+src/core/nginx.c:            ngx_log_error(NGX_LOG_ALERT, cycle->log, ngx_errno,
+src/core/nginx.c:    ngx_log_error(NGX_LOG_NOTICE, cycle->log, 0,
+src/core/nginx.c:    if (ngx_array_init(&cycle->listening, cycle->pool, 10,
+src/core/nginx.c:                ngx_log_error(NGX_LOG_EMERG, cycle->log, 0,
+src/core/nginx.c:            ls = ngx_array_push(&cycle->listening);
+src/core/nginx.c:        ngx_log_error(NGX_LOG_EMERG, cycle->log, 0,
+src/core/nginx.c:    ccf = (ngx_core_conf_t *) ngx_get_conf(cycle->conf_ctx, ngx_core_module);
+src/core/nginx.c:        env = ngx_alloc((*last + n + 1) * sizeof(char *), cycle->log);
+src/core/nginx.c:        cln = ngx_pool_cleanup_add(cycle->pool, 0);
+src/core/nginx.c:        env = ngx_alloc((n + 1) * sizeof(char *), cycle->log);
+src/core/nginx.c:                    + cycle->listening.nelts * (NGX_INT32_LEN + 1) + 2,
+src/core/nginx.c:                    cycle->log);
+src/core/nginx.c:    ls = cycle->listening.elts;
+src/core/nginx.c:    for (i = 0; i < cycle->listening.nelts; i++) {
+src/core/nginx.c:        ngx_log_debug1(NGX_LOG_DEBUG_CORE, cycle->log, 0, "env: %s", *e);
+src/core/nginx.c:    ccf = (ngx_core_conf_t *) ngx_get_conf(cycle->conf_ctx, ngx_core_module);
+src/core/nginx.c:        ngx_log_error(NGX_LOG_ALERT, cycle->log, ngx_errno,
+src/core/nginx.c:            ngx_log_error(NGX_LOG_ALERT, cycle->log, ngx_errno,
+src/core/nginx.c:    ngx_argv = ngx_alloc((argc + 1) * sizeof(char *), cycle->log);
+src/core/nginx.c:        ngx_argv[i] = ngx_alloc(len, cycle->log);
+src/core/nginx.c:            p = ngx_pnalloc(cycle->pool, len + 1);
+src/core/nginx.c:        cycle->conf_prefix.len = len;
+src/core/nginx.c:        cycle->conf_prefix.data = p;
+src/core/nginx.c:        cycle->prefix.len = len;
+src/core/nginx.c:        cycle->prefix.data = p;
+src/core/nginx.c:        p = ngx_pnalloc(cycle->pool, NGX_MAX_PATH);
+src/core/nginx.c:        cycle->conf_prefix.len = len;
+src/core/nginx.c:        cycle->conf_prefix.data = p;
+src/core/nginx.c:        cycle->prefix.len = len;
+src/core/nginx.c:        cycle->prefix.data = p;
+src/core/nginx.c:        ngx_str_set(&cycle->conf_prefix, NGX_CONF_PREFIX);
+src/core/nginx.c:        ngx_str_set(&cycle->conf_prefix, NGX_PREFIX);
+src/core/nginx.c:        ngx_str_set(&cycle->prefix, NGX_PREFIX);
+src/core/nginx.c:        cycle->conf_file.len = ngx_strlen(ngx_conf_file);
+src/core/nginx.c:        cycle->conf_file.data = ngx_conf_file;
+src/core/nginx.c:        ngx_str_set(&cycle->conf_file, NGX_CONF_PATH);
+src/core/nginx.c:    if (ngx_conf_full_name(cycle, &cycle->conf_file, 0) != NGX_OK) {
+src/core/nginx.c:    for (p = cycle->conf_file.data + cycle->conf_file.len - 1;
+src/core/nginx.c:         p > cycle->conf_file.data;
+src/core/nginx.c:            cycle->conf_prefix.len = p - cycle->conf_file.data + 1;
+src/core/nginx.c:            cycle->conf_prefix.data = cycle->conf_file.data;
+src/core/nginx.c:        cycle->conf_param.len = ngx_strlen(ngx_conf_params);
+src/core/nginx.c:        cycle->conf_param.data = ngx_conf_params;
+src/core/nginx.c:        cycle->log->log_level = NGX_LOG_INFO;
+src/core/nginx.c:    ccf = ngx_pcalloc(cycle->pool, sizeof(ngx_core_conf_t));
+src/core/nginx.c:    if (ngx_array_init(&ccf->env, cycle->pool, 1, sizeof(ngx_str_t))
+src/core/nginx.c:        ngx_log_error(NGX_LOG_WARN, cycle->log, 0,
+src/core/nginx.c:    ccf->oldpid.data = ngx_pnalloc(cycle->pool, ccf->oldpid.len);
+src/core/nginx.c:            ngx_log_error(NGX_LOG_EMERG, cycle->log, ngx_errno,
+src/core/nginx.c:            ngx_log_error(NGX_LOG_EMERG, cycle->log, ngx_errno,
+src/core/nginx.c:    lock_file = cycle->old_cycle->lock_file;
+src/core/nginx.c:            ngx_log_error(NGX_LOG_EMERG, cycle->log, 0,
+src/core/nginx.c:        cycle->lock_file.len = lock_file.len + 1;
+src/core/nginx.c:        cycle->lock_file.data = ngx_pstrdup(cycle->pool, &lock_file);
+src/core/nginx.c:        if (cycle->lock_file.data == NULL) {
+src/core/nginx.c:        cycle->lock_file.len = ccf->lock_file.len + 1;
+src/core/nginx.c:        cycle->lock_file.data = ngx_pnalloc(cycle->pool,
+src/core/nginx.c:        if (cycle->lock_file.data == NULL) {
+src/core/nginx.c:        ngx_memcpy(ngx_cpymem(cycle->lock_file.data, ccf->lock_file.data,
+src/core/nginx.c:    ccf = (ngx_core_conf_t *) ngx_get_conf(ngx_cycle->conf_ctx,
+src/core/nginx.c:    if (cf->cycle->modules_used) {
+src/core/nginx.c:    cln = ngx_pool_cleanup_add(cf->cycle->pool, 0);
+src/core/nginx.c:        ngx_log_error(NGX_LOG_ALERT, ngx_cycle->log, 0,
+src/core/ngx_conf_file.c:    param = &cf->cycle->conf_param;
+src/core/ngx_conf_file.c:    sn = ngx_str_rbtree_lookup(&cf->cycle->config_dump_rbtree, filename, hash);
+src/core/ngx_conf_file.c:    p = ngx_pstrdup(cf->cycle->pool, filename);
+src/core/ngx_conf_file.c:    cd = ngx_array_push(&cf->cycle->config_dump);
+src/core/ngx_conf_file.c:    buf = ngx_create_temp_buf(cf->cycle->pool, (size_t) size);
+src/core/ngx_conf_file.c:    ngx_rbtree_insert(&cf->cycle->config_dump_rbtree, &sn->node);
+src/core/ngx_conf_file.c:    for (i = 0; cf->cycle->modules[i]; i++) {
+src/core/ngx_conf_file.c:        cmd = cf->cycle->modules[i]->commands;
+src/core/ngx_conf_file.c:            if (cf->cycle->modules[i]->type != NGX_CONF_MODULE
+src/core/ngx_conf_file.c:                && cf->cycle->modules[i]->type != cf->module_type)
+src/core/ngx_conf_file.c:                conf = ((void **) cf->ctx)[cf->cycle->modules[i]->index];
+src/core/ngx_conf_file.c:                conf = &(((void **) cf->ctx)[cf->cycle->modules[i]->index]);
+src/core/ngx_conf_file.c:                    conf = confp[cf->cycle->modules[i]->ctx_index];
+src/core/ngx_conf_file.c:    prefix = conf_prefix ? &cycle->conf_prefix : &cycle->prefix;
+src/core/ngx_conf_file.c:    return ngx_get_full_name(cycle->pool, prefix, name);
+src/core/ngx_conf_file.c:        part = &cycle->open_files.part;
+src/core/ngx_conf_file.c:    file = ngx_list_push(&cycle->open_files);
+src/core/ngx_conf_file.c:    ngx_log_debug0(NGX_LOG_DEBUG_CORE, cycle->log, 0, "flush files");
+src/core/ngx_conf_file.c:    part = &cycle->open_files.part;
+src/core/ngx_conf_file.c:            file[i].flush(&file[i], cycle->log);
+src/core/ngx_connection.c:    ls = ngx_array_push(&cf->cycle->listening);
+src/core/ngx_connection.c:    ccf = (ngx_core_conf_t *) ngx_get_conf(cycle->conf_ctx, ngx_core_module);
+src/core/ngx_connection.c:        ls = ngx_array_push(&cycle->listening);
+src/core/ngx_connection.c:    ls = cycle->listening.elts;
+src/core/ngx_connection.c:    for (i = 0; i < cycle->listening.nelts; i++) {
+src/core/ngx_connection.c:        ls[i].sockaddr = ngx_palloc(cycle->pool, sizeof(ngx_sockaddr_t));
+src/core/ngx_connection.c:            ngx_log_error(NGX_LOG_CRIT, cycle->log, ngx_socket_errno,
+src/core/ngx_connection.c:            ngx_log_error(NGX_LOG_CRIT, cycle->log, ngx_socket_errno,
+src/core/ngx_connection.c:        ls[i].addr_text.data = ngx_pnalloc(cycle->pool, len);
+src/core/ngx_connection.c:            ngx_log_error(NGX_LOG_CRIT, cycle->log, ngx_socket_errno,
+src/core/ngx_connection.c:            ngx_log_error(NGX_LOG_ALERT, cycle->log, ngx_socket_errno,
+src/core/ngx_connection.c:            ngx_log_error(NGX_LOG_ALERT, cycle->log, ngx_socket_errno,
+src/core/ngx_connection.c:            ngx_log_error(NGX_LOG_ALERT, cycle->log, ngx_socket_errno,
+src/core/ngx_connection.c:            ngx_log_error(NGX_LOG_ALERT, cycle->log, ngx_socket_errno,
+src/core/ngx_connection.c:            ngx_log_error(NGX_LOG_ALERT, cycle->log, ngx_socket_errno,
+src/core/ngx_connection.c:                ngx_log_error(NGX_LOG_NOTICE, cycle->log, err,
+src/core/ngx_connection.c:            ngx_log_error(NGX_LOG_NOTICE, cycle->log, err,
+src/core/ngx_connection.c:        ls[i].accept_filter = ngx_palloc(cycle->pool, 16);
+src/core/ngx_connection.c:            ngx_log_error(NGX_LOG_NOTICE, cycle->log, err,
+src/core/ngx_connection.c:    log = cycle->log;
+src/core/ngx_connection.c:        ls = cycle->listening.elts;
+src/core/ngx_connection.c:        for (i = 0; i < cycle->listening.nelts; i++) {
+src/core/ngx_connection.c:                    ngx_log_error(NGX_LOG_ALERT, cycle->log, ngx_socket_errno,
+src/core/ngx_connection.c:                    ngx_log_error(NGX_LOG_ALERT, cycle->log, ngx_socket_errno,
+src/core/ngx_connection.c:                    ngx_log_error(NGX_LOG_EMERG, cycle->log, ngx_errno,
+src/core/ngx_connection.c:                        ngx_log_error(NGX_LOG_EMERG, cycle->log, ngx_errno,
+src/core/ngx_connection.c:    ls = cycle->listening.elts;
+src/core/ngx_connection.c:    for (i = 0; i < cycle->listening.nelts; i++) {
+src/core/ngx_connection.c:                ngx_log_error(NGX_LOG_ALERT, cycle->log, ngx_socket_errno,
+src/core/ngx_connection.c:                ngx_log_error(NGX_LOG_ALERT, cycle->log, ngx_socket_errno,
+src/core/ngx_connection.c:                ngx_log_error(NGX_LOG_ALERT, cycle->log, ngx_socket_errno,
+src/core/ngx_connection.c:                ngx_log_error(NGX_LOG_ALERT, cycle->log, ngx_socket_errno,
+src/core/ngx_connection.c:                ngx_log_error(NGX_LOG_ALERT, cycle->log, ngx_socket_errno,
+src/core/ngx_connection.c:                ngx_log_error(NGX_LOG_ALERT, cycle->log, ngx_socket_errno,
+src/core/ngx_connection.c:                ngx_log_error(NGX_LOG_ALERT, cycle->log, ngx_socket_errno,
+src/core/ngx_connection.c:                ngx_log_error(NGX_LOG_ALERT, cycle->log, ngx_socket_errno,
+src/core/ngx_connection.c:                ngx_log_error(NGX_LOG_ALERT, cycle->log, ngx_socket_errno,
+src/core/ngx_connection.c:                ngx_log_error(NGX_LOG_ALERT, cycle->log, ngx_socket_errno,
+src/core/ngx_connection.c:                ngx_log_error(NGX_LOG_ALERT, cycle->log, ngx_socket_errno,
+src/core/ngx_connection.c:                    ngx_log_error(NGX_LOG_ALERT, cycle->log, 0,
+src/core/ngx_connection.c:                ngx_log_error(NGX_LOG_ALERT, cycle->log, ngx_socket_errno,
+src/core/ngx_connection.c:                ngx_log_error(NGX_LOG_ALERT, cycle->log, ngx_socket_errno,
+src/core/ngx_connection.c:                ngx_log_error(NGX_LOG_ALERT, cycle->log, ngx_socket_errno,
+src/core/ngx_connection.c:                ngx_log_error(NGX_LOG_ALERT, cycle->log, ngx_socket_errno,
+src/core/ngx_connection.c:                ngx_log_error(NGX_LOG_ALERT, cycle->log, ngx_socket_errno,
+src/core/ngx_connection.c:    ls = cycle->listening.elts;
+src/core/ngx_connection.c:    for (i = 0; i < cycle->listening.nelts; i++) {
+src/core/ngx_connection.c:        ngx_log_debug2(NGX_LOG_DEBUG_CORE, cycle->log, 0,
+src/core/ngx_connection.c:            ngx_log_error(NGX_LOG_EMERG, cycle->log, ngx_socket_errno,
+src/core/ngx_connection.c:                ngx_log_error(NGX_LOG_EMERG, cycle->log, ngx_socket_errno,
+src/core/ngx_connection.c:    cycle->listening.nelts = 0;
+src/core/ngx_connection.c:    if (ngx_cycle->files && (ngx_uint_t) s >= ngx_cycle->files_n) {
+src/core/ngx_connection.c:                      s, ngx_cycle->files_n);
+src/core/ngx_connection.c:    c = ngx_cycle->free_connections;
+src/core/ngx_connection.c:        c = ngx_cycle->free_connections;
+src/core/ngx_connection.c:                      ngx_cycle->connection_n);
+src/core/ngx_connection.c:    ngx_cycle->free_connections = c->data;
+src/core/ngx_connection.c:    ngx_cycle->free_connection_n--;
+src/core/ngx_connection.c:    if (ngx_cycle->files && ngx_cycle->files[s] == NULL) {
+src/core/ngx_connection.c:        ngx_cycle->files[s] = c;
+src/core/ngx_connection.c:    c->data = ngx_cycle->free_connections;
+src/core/ngx_connection.c:    ngx_cycle->free_connections = c;
+src/core/ngx_connection.c:    ngx_cycle->free_connection_n++;
+src/core/ngx_connection.c:    if (ngx_cycle->files && ngx_cycle->files[c->fd] == c) {
+src/core/ngx_connection.c:        ngx_cycle->files[c->fd] = NULL;
+src/core/ngx_connection.c:        ngx_cycle->reusable_connections_n--;
+src/core/ngx_connection.c:            (ngx_queue_t *) &ngx_cycle->reusable_connections_queue, &c->queue);
+src/core/ngx_connection.c:        ngx_cycle->reusable_connections_n++;
+src/core/ngx_connection.c:    n = ngx_max(ngx_min(32, cycle->reusable_connections_n / 8), 1);
+src/core/ngx_connection.c:        if (ngx_queue_empty(&cycle->reusable_connections_queue)) {
+src/core/ngx_connection.c:        q = ngx_queue_last(&cycle->reusable_connections_queue);
+src/core/ngx_connection.c:    c = cycle->connections;
+src/core/ngx_connection.c:    for (i = 0; i < cycle->connection_n; i++) {
+src/core/ngx_crc32.c:    p = ngx_alloc(16 * sizeof(uint32_t) + ngx_cacheline_size, ngx_cycle->log);
+src/core/ngx_cycle.c:    log = old_cycle->log;
+src/core/ngx_cycle.c:    cycle->pool = pool;
+src/core/ngx_cycle.c:    cycle->log = log;
+src/core/ngx_cycle.c:    cycle->old_cycle = old_cycle;
+src/core/ngx_cycle.c:    cycle->conf_prefix.len = old_cycle->conf_prefix.len;
+src/core/ngx_cycle.c:    cycle->conf_prefix.data = ngx_pstrdup(pool, &old_cycle->conf_prefix);
+src/core/ngx_cycle.c:    if (cycle->conf_prefix.data == NULL) {
+src/core/ngx_cycle.c:    cycle->prefix.len = old_cycle->prefix.len;
+src/core/ngx_cycle.c:    cycle->prefix.data = ngx_pstrdup(pool, &old_cycle->prefix);
+src/core/ngx_cycle.c:    if (cycle->prefix.data == NULL) {
+src/core/ngx_cycle.c:    cycle->conf_file.len = old_cycle->conf_file.len;
+src/core/ngx_cycle.c:    cycle->conf_file.data = ngx_pnalloc(pool, old_cycle->conf_file.len + 1);
+src/core/ngx_cycle.c:    if (cycle->conf_file.data == NULL) {
+src/core/ngx_cycle.c:    ngx_cpystrn(cycle->conf_file.data, old_cycle->conf_file.data,
+src/core/ngx_cycle.c:                old_cycle->conf_file.len + 1);
+src/core/ngx_cycle.c:    cycle->conf_param.len = old_cycle->conf_param.len;
+src/core/ngx_cycle.c:    cycle->conf_param.data = ngx_pstrdup(pool, &old_cycle->conf_param);
+src/core/ngx_cycle.c:    if (cycle->conf_param.data == NULL) {
+src/core/ngx_cycle.c:    n = old_cycle->paths.nelts ? old_cycle->paths.nelts : 10;
+src/core/ngx_cycle.c:    if (ngx_array_init(&cycle->paths, pool, n, sizeof(ngx_path_t *))
+src/core/ngx_cycle.c:    ngx_memzero(cycle->paths.elts, n * sizeof(ngx_path_t *));
+src/core/ngx_cycle.c:    if (ngx_array_init(&cycle->config_dump, pool, 1, sizeof(ngx_conf_dump_t))
+src/core/ngx_cycle.c:    ngx_rbtree_init(&cycle->config_dump_rbtree, &cycle->config_dump_sentinel,
+src/core/ngx_cycle.c:    if (old_cycle->open_files.part.nelts) {
+src/core/ngx_cycle.c:        n = old_cycle->open_files.part.nelts;
+src/core/ngx_cycle.c:        for (part = old_cycle->open_files.part.next; part; part = part->next) {
+src/core/ngx_cycle.c:    if (ngx_list_init(&cycle->open_files, pool, n, sizeof(ngx_open_file_t))
+src/core/ngx_cycle.c:    if (old_cycle->shared_memory.part.nelts) {
+src/core/ngx_cycle.c:        n = old_cycle->shared_memory.part.nelts;
+src/core/ngx_cycle.c:        for (part = old_cycle->shared_memory.part.next; part; part = part->next)
+src/core/ngx_cycle.c:    if (ngx_list_init(&cycle->shared_memory, pool, n, sizeof(ngx_shm_zone_t))
+src/core/ngx_cycle.c:    n = old_cycle->listening.nelts ? old_cycle->listening.nelts : 10;
+src/core/ngx_cycle.c:    if (ngx_array_init(&cycle->listening, pool, n, sizeof(ngx_listening_t))
+src/core/ngx_cycle.c:    ngx_memzero(cycle->listening.elts, n * sizeof(ngx_listening_t));
+src/core/ngx_cycle.c:    ngx_queue_init(&cycle->reusable_connections_queue);
+src/core/ngx_cycle.c:    cycle->conf_ctx = ngx_pcalloc(pool, ngx_max_module * sizeof(void *));
+src/core/ngx_cycle.c:    if (cycle->conf_ctx == NULL) {
+src/core/ngx_cycle.c:    cycle->hostname.len = ngx_strlen(hostname);
+src/core/ngx_cycle.c:    cycle->hostname.data = ngx_pnalloc(pool, cycle->hostname.len);
+src/core/ngx_cycle.c:    if (cycle->hostname.data == NULL) {
+src/core/ngx_cycle.c:    ngx_strlow(cycle->hostname.data, (u_char *) hostname, cycle->hostname.len);
+src/core/ngx_cycle.c:    for (i = 0; cycle->modules[i]; i++) {
+src/core/ngx_cycle.c:        if (cycle->modules[i]->type != NGX_CORE_MODULE) {
+src/core/ngx_cycle.c:        module = cycle->modules[i]->ctx;
+src/core/ngx_cycle.c:            cycle->conf_ctx[cycle->modules[i]->index] = rv;
+src/core/ngx_cycle.c:    conf.ctx = cycle->conf_ctx;
+src/core/ngx_cycle.c:    if (ngx_conf_parse(&conf, &cycle->conf_file) != NGX_CONF_OK) {
+src/core/ngx_cycle.c:                       cycle->conf_file.data);
+src/core/ngx_cycle.c:    for (i = 0; cycle->modules[i]; i++) {
+src/core/ngx_cycle.c:        if (cycle->modules[i]->type != NGX_CORE_MODULE) {
+src/core/ngx_cycle.c:        module = cycle->modules[i]->ctx;
+src/core/ngx_cycle.c:                                  cycle->conf_ctx[cycle->modules[i]->index])
+src/core/ngx_cycle.c:    ccf = (ngx_core_conf_t *) ngx_get_conf(cycle->conf_ctx, ngx_core_module);
+src/core/ngx_cycle.c:        old_ccf = (ngx_core_conf_t *) ngx_get_conf(old_cycle->conf_ctx,
+src/core/ngx_cycle.c:    if (ngx_test_lockfile(cycle->lock_file.data, log) != NGX_OK) {
+src/core/ngx_cycle.c:    part = &cycle->open_files.part;
+src/core/ngx_cycle.c:    cycle->log = &cycle->new_log;
+src/core/ngx_cycle.c:    pool->log = &cycle->new_log;
+src/core/ngx_cycle.c:    part = &cycle->shared_memory.part;
+src/core/ngx_cycle.c:        shm_zone[i].shm.log = cycle->log;
+src/core/ngx_cycle.c:        opart = &old_cycle->shared_memory.part;
+src/core/ngx_cycle.c:    if (old_cycle->listening.nelts) {
+src/core/ngx_cycle.c:        ls = old_cycle->listening.elts;
+src/core/ngx_cycle.c:        for (i = 0; i < old_cycle->listening.nelts; i++) {
+src/core/ngx_cycle.c:        nls = cycle->listening.elts;
+src/core/ngx_cycle.c:        for (n = 0; n < cycle->listening.nelts; n++) {
+src/core/ngx_cycle.c:            for (i = 0; i < old_cycle->listening.nelts; i++) {
+src/core/ngx_cycle.c:        ls = cycle->listening.elts;
+src/core/ngx_cycle.c:        for (i = 0; i < cycle->listening.nelts; i++) {
+src/core/ngx_cycle.c:    pool->log = cycle->log;
+src/core/ngx_cycle.c:    opart = &old_cycle->shared_memory.part;
+src/core/ngx_cycle.c:        part = &cycle->shared_memory.part;
+src/core/ngx_cycle.c:    ls = old_cycle->listening.elts;
+src/core/ngx_cycle.c:    for (i = 0; i < old_cycle->listening.nelts; i++) {
+src/core/ngx_cycle.c:            ngx_log_error(NGX_LOG_WARN, cycle->log, 0,
+src/core/ngx_cycle.c:                ngx_log_error(NGX_LOG_EMERG, cycle->log, ngx_socket_errno,
+src/core/ngx_cycle.c:    part = &old_cycle->open_files.part;
+src/core/ngx_cycle.c:        ngx_destroy_pool(old_cycle->pool);
+src/core/ngx_cycle.c:        cycle->old_cycle = NULL;
+src/core/ngx_cycle.c:        ngx_temp_pool = ngx_create_pool(128, cycle->log);
+src/core/ngx_cycle.c:            ngx_log_error(NGX_LOG_EMERG, cycle->log, 0,
+src/core/ngx_cycle.c:        ngx_cleaner_event.log = cycle->log;
+src/core/ngx_cycle.c:    ngx_temp_pool->log = cycle->log;
+src/core/ngx_cycle.c:        old_ccf = (ngx_core_conf_t *) ngx_get_conf(old_cycle->conf_ctx,
+src/core/ngx_cycle.c:    part = &cycle->open_files.part;
+src/core/ngx_cycle.c:    part = &cycle->shared_memory.part;
+src/core/ngx_cycle.c:        opart = &old_cycle->shared_memory.part;
+src/core/ngx_cycle.c:    ls = cycle->listening.elts;
+src/core/ngx_cycle.c:    for (i = 0; i < cycle->listening.nelts; i++) {
+src/core/ngx_cycle.c:        ngx_log_error(NGX_LOG_EMERG, cycle->log, 0,
+src/core/ngx_cycle.c:    file = ngx_pnalloc(cycle->pool,
+src/core/ngx_cycle.c:                       cycle->lock_file.len + zn->shm.name.len + 1);
+src/core/ngx_cycle.c:    (void) ngx_sprintf(file, "%V%V%Z", &cycle->lock_file, &zn->shm.name);
+src/core/ngx_cycle.c:    ccf = (ngx_core_conf_t *) ngx_get_conf(cycle->conf_ctx, ngx_core_module);
+src/core/ngx_cycle.c:        ngx_log_error(NGX_LOG_ALERT, cycle->log, ngx_errno,
+src/core/ngx_cycle.c:    ngx_log_error(NGX_LOG_NOTICE, cycle->log, 0, "signal process started");
+src/core/ngx_cycle.c:    ccf = (ngx_core_conf_t *) ngx_get_conf(cycle->conf_ctx, ngx_core_module);
+src/core/ngx_cycle.c:    file.log = cycle->log;
+src/core/ngx_cycle.c:        ngx_log_error(NGX_LOG_ERR, cycle->log, ngx_errno,
+src/core/ngx_cycle.c:        ngx_log_error(NGX_LOG_ALERT, cycle->log, ngx_errno,
+src/core/ngx_cycle.c:        ngx_log_error(NGX_LOG_ERR, cycle->log, 0,
+src/core/ngx_cycle.c:    part = &cycle->open_files.part;
+src/core/ngx_cycle.c:            file[i].flush(&file[i], cycle->log);
+src/core/ngx_cycle.c:        ngx_log_debug3(NGX_LOG_DEBUG_EVENT, cycle->log, 0,
+src/core/ngx_cycle.c:            ngx_log_error(NGX_LOG_EMERG, cycle->log, ngx_errno,
+src/core/ngx_cycle.c:                ngx_log_error(NGX_LOG_EMERG, cycle->log, ngx_errno,
+src/core/ngx_cycle.c:                    ngx_log_error(NGX_LOG_EMERG, cycle->log, ngx_errno,
+src/core/ngx_cycle.c:                    ngx_log_error(NGX_LOG_EMERG, cycle->log, ngx_errno,
+src/core/ngx_cycle.c:                        ngx_log_error(NGX_LOG_EMERG, cycle->log, ngx_errno,
+src/core/ngx_cycle.c:                    ngx_log_error(NGX_LOG_EMERG, cycle->log, ngx_errno,
+src/core/ngx_cycle.c:                        ngx_log_error(NGX_LOG_EMERG, cycle->log, ngx_errno,
+src/core/ngx_cycle.c:            ngx_log_error(NGX_LOG_EMERG, cycle->log, ngx_errno,
+src/core/ngx_cycle.c:                ngx_log_error(NGX_LOG_EMERG, cycle->log, ngx_errno,
+src/core/ngx_cycle.c:            ngx_log_error(NGX_LOG_EMERG, cycle->log, ngx_errno,
+src/core/ngx_cycle.c:    part = &cf->cycle->shared_memory.part;
+src/core/ngx_cycle.c:    shm_zone = ngx_list_push(&cf->cycle->shared_memory);
+src/core/ngx_cycle.c:    shm_zone->shm.log = cf->cycle->log;
+src/core/ngx_cycle.c:    log = ngx_cycle->log;
+src/core/ngx_cycle.c:    ccf = (ngx_core_conf_t *) ngx_get_conf(cycle->conf_ctx, ngx_core_module);
+src/core/ngx_cycle.c:        ngx_shutdown_event.log = cycle->log;
+src/core/ngx_cycle.c:    c = cycle->connections;
+src/core/ngx_cycle.c:    for (i = 0; i < cycle->connection_n; i++) {
+src/core/ngx_cycle.h:#define ngx_is_init_cycle(cycle)  (cycle->conf_ctx == NULL)
+src/core/ngx_file.c:    p = cf->cycle->paths.elts;
+src/core/ngx_file.c:    for (i = 0; i < cf->cycle->paths.nelts; i++) {
+src/core/ngx_file.c:    p = ngx_array_push(&cf->cycle->paths);
+src/core/ngx_file.c:    path = cycle->paths.elts;
+src/core/ngx_file.c:    for (i = 0; i < cycle->paths.nelts; i++) {
+src/core/ngx_file.c:                ngx_log_error(NGX_LOG_EMERG, cycle->log, err,
+src/core/ngx_file.c:            ngx_log_error(NGX_LOG_EMERG, cycle->log, ngx_errno,
+src/core/ngx_file.c:                ngx_log_error(NGX_LOG_EMERG, cycle->log, ngx_errno,
+src/core/ngx_file.c:                ngx_log_error(NGX_LOG_EMERG, cycle->log, ngx_errno,
+src/core/ngx_hash.c:    ngx_log_error(NGX_LOG_ALERT, ngx_cycle->log, 0, "hf:\"%*s\"", len, name);
+src/core/ngx_hash.c:    ngx_log_error(NGX_LOG_ALERT, ngx_cycle->log, 0, "wch:\"%*s\"", len, name);
+src/core/ngx_hash.c:    ngx_log_error(NGX_LOG_ALERT, ngx_cycle->log, 0, "key:\"%ui\"", key);
+src/core/ngx_hash.c:    ngx_log_error(NGX_LOG_ALERT, ngx_cycle->log, 0, "value:\"%p\"", value);
+src/core/ngx_hash.c:    ngx_log_error(NGX_LOG_ALERT, ngx_cycle->log, 0, "wct:\"%*s\"", len, name);
+src/core/ngx_hash.c:    ngx_log_error(NGX_LOG_ALERT, ngx_cycle->log, 0, "key:\"%ui\"", key);
+src/core/ngx_hash.c:    ngx_log_error(NGX_LOG_ALERT, ngx_cycle->log, 0, "value:\"%p\"", value);
+src/core/ngx_log.c:    ngx_log_error(NGX_LOG_ALERT, ngx_cycle->log, err,
+src/core/ngx_log.c:    if (ngx_log_get_file_log(&cycle->new_log) != NULL) {
+src/core/ngx_log.c:    if (cycle->new_log.log_level != 0) {
+src/core/ngx_log.c:        log = ngx_pcalloc(cycle->pool, sizeof(ngx_log_t));
+src/core/ngx_log.c:        log = &cycle->new_log;
+src/core/ngx_log.c:    if (log != &cycle->new_log) {
+src/core/ngx_log.c:        ngx_log_insert(&cycle->new_log, log);
+src/core/ngx_log.c:    if (cycle->log_use_stderr) {
+src/core/ngx_log.c:    fd = ngx_log_get_file_log(cycle->log)->file->fd;
+src/core/ngx_log.c:            ngx_log_error(NGX_LOG_ALERT, cycle->log, ngx_errno,
+src/core/ngx_log.c:    dummy = &cf->cycle->new_log;
+src/core/ngx_log.c:        cf->cycle->log_use_stderr = 1;
+src/core/ngx_module.c:    cycle->modules = ngx_pcalloc(cycle->pool, (ngx_max_module + 1)
+src/core/ngx_module.c:    if (cycle->modules == NULL) {
+src/core/ngx_module.c:    ngx_memcpy(cycle->modules, ngx_modules,
+src/core/ngx_module.c:    cycle->modules_n = ngx_modules_n;
+src/core/ngx_module.c:    for (i = 0; cycle->modules[i]; i++) {
+src/core/ngx_module.c:        if (cycle->modules[i]->init_module) {
+src/core/ngx_module.c:            if (cycle->modules[i]->init_module(cycle) != NGX_OK) {
+src/core/ngx_module.c:    for (i = 0; cycle->modules[i]; i++) {
+src/core/ngx_module.c:        module = cycle->modules[i];
+src/core/ngx_module.c:    if (cycle->old_cycle && cycle->old_cycle->modules) {
+src/core/ngx_module.c:        for (i = 0; cycle->old_cycle->modules[i]; i++) {
+src/core/ngx_module.c:            module = cycle->old_cycle->modules[i];
+src/core/ngx_module.c:    cycle->modules_used = 1;
+src/core/ngx_module.c:    if (cf->cycle->modules_n >= ngx_max_module) {
+src/core/ngx_module.c:    for (m = 0; cf->cycle->modules[m]; m++) {
+src/core/ngx_module.c:        if (ngx_strcmp(cf->cycle->modules[m]->name, module->name) == 0) {
+src/core/ngx_module.c:     * put the module into the cycle->modules array
+src/core/ngx_module.c:    before = cf->cycle->modules_n;
+src/core/ngx_module.c:                if (ngx_strcmp(cf->cycle->modules[m]->name, order[i]) == 0) {
+src/core/ngx_module.c:    if (before != cf->cycle->modules_n) {
+src/core/ngx_module.c:        ngx_memmove(&cf->cycle->modules[before + 1],
+src/core/ngx_module.c:                    &cf->cycle->modules[before],
+src/core/ngx_module.c:                    (cf->cycle->modules_n - before) * sizeof(ngx_module_t *));
+src/core/ngx_module.c:    cf->cycle->modules[before] = module;
+src/core/ngx_module.c:    cf->cycle->modules_n++;
+src/core/ngx_module.c:            cf->cycle->conf_ctx[module->index] = rv;
+src/core/ngx_module.c:    for (i = 0; cycle->modules[i]; i++) {
+src/core/ngx_module.c:        module = cycle->modules[i];
+src/core/ngx_module.c:    if (cycle->old_cycle && cycle->old_cycle->modules) {
+src/core/ngx_module.c:        for (i = 0; cycle->old_cycle->modules[i]; i++) {
+src/core/ngx_module.c:            module = cycle->old_cycle->modules[i];
+src/core/ngx_module.c:    for (i = 0; cycle->modules[i]; i++) {
+src/core/ngx_module.c:        module = cycle->modules[i];
+src/core/ngx_module.c:    if (cycle->old_cycle && cycle->old_cycle->modules) {
+src/core/ngx_module.c:        for (i = 0; cycle->old_cycle->modules[i]; i++) {
+src/core/ngx_module.c:            module = cycle->old_cycle->modules[i];
+src/core/ngx_open_file_cache.c:    ngx_log_debug0(NGX_LOG_DEBUG_CORE, ngx_cycle->log, 0,
+src/core/ngx_open_file_cache.c:        ngx_log_debug1(NGX_LOG_DEBUG_CORE, ngx_cycle->log, 0,
+src/core/ngx_open_file_cache.c:            ngx_close_cached_file(cache, file, 0, ngx_cycle->log);
+src/core/ngx_open_file_cache.c:        ngx_log_error(NGX_LOG_ALERT, ngx_cycle->log, 0,
+src/core/ngx_open_file_cache.c:        ngx_log_error(NGX_LOG_ALERT, ngx_cycle->log, 0,
+src/core/ngx_open_file_cache.c:     * although vnode event may be called while ngx_cycle->poll
+src/core/ngx_open_file_cache.c:    file->event->log = ngx_cycle->log;
+src/core/ngx_palloc.c:    if (ngx_cycle->cache == NULL) {
+src/core/ngx_palloc.c:    slot = &ngx_cycle->cache[(size + ngx_pagesize - 1) / ngx_pagesize];
+src/core/ngx_regex.c:    rcf = (ngx_regex_conf_t *) ngx_get_conf(cycle->conf_ctx, ngx_regex_module);
+src/core/ngx_regex.c:        cln = ngx_pool_cleanup_add(cycle->pool, 0);
+src/core/ngx_regex.c:    ngx_regex_malloc_init(cycle->pool);
+src/core/ngx_regex.c:            ngx_log_error(NGX_LOG_ALERT, cycle->log, 0,
+src/core/ngx_regex.c:                ngx_log_error(NGX_LOG_INFO, cycle->log, 0,
+src/core/ngx_regex.c:    rcf = ngx_pcalloc(cycle->pool, sizeof(ngx_regex_conf_t));
+src/core/ngx_regex.c:    ngx_pcre_studies = ngx_list_create(cycle->pool, 8, sizeof(ngx_regex_elt_t));
+src/core/ngx_resolver.c:    r->event->log = &cf->cycle->new_log;
+src/core/ngx_resolver.c:    r->log = &cf->cycle->new_log;
+src/core/ngx_resolver.c:    ngx_log_debug0(NGX_LOG_DEBUG_CORE, ngx_cycle->log, 0, "cleanup resolver");
+src/core/ngx_shmtx.c:        ngx_log_error(NGX_LOG_ALERT, ngx_cycle->log, ngx_errno,
+src/core/ngx_shmtx.c:            ngx_log_error(NGX_LOG_ALERT, ngx_cycle->log, ngx_errno,
+src/core/ngx_shmtx.c:    ngx_log_debug0(NGX_LOG_DEBUG_CORE, ngx_cycle->log, 0, "shmtx lock");
+src/core/ngx_shmtx.c:            ngx_log_debug1(NGX_LOG_DEBUG_CORE, ngx_cycle->log, 0,
+src/core/ngx_shmtx.c:                    ngx_log_error(NGX_LOG_ALERT, ngx_cycle->log, err,
+src/core/ngx_shmtx.c:            ngx_log_debug0(NGX_LOG_DEBUG_CORE, ngx_cycle->log, 0,
+src/core/ngx_shmtx.c:        ngx_log_debug0(NGX_LOG_DEBUG_CORE, ngx_cycle->log, 0, "shmtx unlock");
+src/core/ngx_shmtx.c:    ngx_log_debug0(NGX_LOG_DEBUG_CORE, ngx_cycle->log, 0,
+src/core/ngx_shmtx.c:    ngx_log_debug1(NGX_LOG_DEBUG_CORE, ngx_cycle->log, 0,
+src/core/ngx_shmtx.c:        ngx_log_error(NGX_LOG_ALERT, ngx_cycle->log, ngx_errno,
+src/core/ngx_shmtx.c:        ngx_log_error(NGX_LOG_EMERG, ngx_cycle->log, ngx_errno,
+src/core/ngx_shmtx.c:        ngx_log_error(NGX_LOG_ALERT, ngx_cycle->log, ngx_errno,
+src/core/ngx_shmtx.c:        ngx_log_error(NGX_LOG_ALERT, ngx_cycle->log, ngx_errno,
+src/core/ngx_slab.c:        ngx_log_debug1(NGX_LOG_DEBUG_ALLOC, ngx_cycle->log, 0,
+src/core/ngx_slab.c:    ngx_log_debug2(NGX_LOG_DEBUG_ALLOC, ngx_cycle->log, 0,
+src/core/ngx_slab.c:    ngx_log_debug1(NGX_LOG_DEBUG_ALLOC, ngx_cycle->log, 0,
+src/core/ngx_slab.c:    ngx_log_debug1(NGX_LOG_DEBUG_ALLOC, ngx_cycle->log, 0, "slab free: %p", p);
+src/core/ngx_slab.c:    ngx_log_error(level, ngx_cycle->log, 0, "%s%s", text, pool->log_ctx);
+src/core/ngx_string.c:    p = ngx_alloc(size, ngx_cycle->log);
+src/core/ngx_string.c:        ngx_log_error(NGX_LOG_ALERT, ngx_cycle->log, 0, "memcpy %uz bytes", n);
+src/core/ngx_syslog.c:                       &ngx_cycle->hostname, &peer->tag);
+src/core/ngx_syslog.c:    peer->conn.log = ngx_cycle->log;
+src/core/ngx_syslog.c:            ngx_log_error(NGX_LOG_ALERT, ngx_cycle->log, ngx_socket_errno,
+src/core/ngx_syslog.c:        ngx_log_error(NGX_LOG_ALERT, ngx_cycle->log, ngx_socket_errno,
+src/core/ngx_syslog.c:        ngx_log_error(NGX_LOG_ALERT, ngx_cycle->log, ngx_socket_errno,
+src/core/ngx_syslog.c:        ngx_log_error(NGX_LOG_ALERT, ngx_cycle->log, ngx_socket_errno,
+src/core/ngx_syslog.c:        ngx_log_error(NGX_LOG_ALERT, ngx_cycle->log, ngx_socket_errno,
+src/core/ngx_syslog.c:        ngx_log_error(NGX_LOG_ALERT, ngx_cycle->log, ngx_socket_errno,
+src/core/ngx_thread_pool.c:    tcf = ngx_pcalloc(cycle->pool, sizeof(ngx_thread_pool_conf_t));
+src/core/ngx_thread_pool.c:    if (ngx_array_init(&tcf->pools, cycle->pool, 4,
+src/core/ngx_thread_pool.c:        ngx_log_error(NGX_LOG_EMERG, cycle->log, 0,
+src/core/ngx_thread_pool.c:    tcf = (ngx_thread_pool_conf_t *) ngx_get_conf(cf->cycle->conf_ctx,
+src/core/ngx_thread_pool.c:    tcf = (ngx_thread_pool_conf_t *) ngx_get_conf(cycle->conf_ctx,
+src/core/ngx_thread_pool.c:    tcf = (ngx_thread_pool_conf_t *) ngx_get_conf(cycle->conf_ctx,
+src/core/ngx_thread_pool.c:        if (ngx_thread_pool_init(tpp[i], cycle->log, cycle->pool) != NGX_OK) {
+src/core/ngx_thread_pool.c:    tcf = (ngx_thread_pool_conf_t *) ngx_get_conf(cycle->conf_ctx,
+src/event/modules/ngx_devpoll_module.c:    dpcf = ngx_event_get_conf(cycle->conf_ctx, ngx_devpoll_module);
+src/event/modules/ngx_devpoll_module.c:            ngx_log_error(NGX_LOG_EMERG, cycle->log, ngx_errno,
+src/event/modules/ngx_devpoll_module.c:                ngx_log_error(NGX_LOG_ALERT, cycle->log, ngx_errno,
+src/event/modules/ngx_devpoll_module.c:                                cycle->log);
+src/event/modules/ngx_devpoll_module.c:                                 cycle->log);
+src/event/modules/ngx_devpoll_module.c:                               cycle->log);
+src/event/modules/ngx_devpoll_module.c:        ngx_log_error(NGX_LOG_ALERT, cycle->log, ngx_errno,
+src/event/modules/ngx_devpoll_module.c:    ngx_log_debug1(NGX_LOG_DEBUG_EVENT, cycle->log, 0,
+src/event/modules/ngx_devpoll_module.c:            ngx_log_error(NGX_LOG_ALERT, cycle->log, ngx_errno,
+src/event/modules/ngx_devpoll_module.c:        ngx_log_error(level, cycle->log, err, "ioctl(DP_POLL) failed");
+src/event/modules/ngx_devpoll_module.c:        ngx_log_error(NGX_LOG_ALERT, cycle->log, 0,
+src/event/modules/ngx_devpoll_module.c:        c = ngx_cycle->files[fd];
+src/event/modules/ngx_devpoll_module.c:                ngx_log_error(NGX_LOG_ALERT, cycle->log, ngx_errno,
+src/event/modules/ngx_devpoll_module.c:                ngx_log_error(NGX_LOG_ALERT, cycle->log, 0,
+src/event/modules/ngx_devpoll_module.c:                ngx_log_error(NGX_LOG_ALERT, cycle->log, 0,
+src/event/modules/ngx_devpoll_module.c:                    ngx_log_error(NGX_LOG_ALERT, cycle->log, ngx_errno,
+src/event/modules/ngx_devpoll_module.c:                    ngx_log_error(NGX_LOG_ALERT, cycle->log, ngx_errno,
+src/event/modules/ngx_devpoll_module.c:        ngx_log_debug3(NGX_LOG_DEBUG_EVENT, cycle->log, 0,
+src/event/modules/ngx_devpoll_module.c:            ngx_log_debug3(NGX_LOG_DEBUG_EVENT, cycle->log, 0,
+src/event/modules/ngx_devpoll_module.c:            ngx_log_error(NGX_LOG_ALERT, cycle->log, 0,
+src/event/modules/ngx_devpoll_module.c:    dpcf = ngx_palloc(cycle->pool, sizeof(ngx_devpoll_conf_t));
+src/event/modules/ngx_epoll_module.c:        ngx_log_error(NGX_LOG_EMERG, cycle->log, ngx_errno,
+src/event/modules/ngx_epoll_module.c:    ngx_log_debug1(NGX_LOG_DEBUG_EVENT, cycle->log, 0,
+src/event/modules/ngx_epoll_module.c:        ngx_log_error(NGX_LOG_EMERG, cycle->log, ngx_errno,
+src/event/modules/ngx_epoll_module.c:        ngx_log_error(NGX_LOG_EMERG, cycle->log, ngx_errno,
+src/event/modules/ngx_epoll_module.c:    ngx_eventfd_event.log = cycle->log;
+src/event/modules/ngx_epoll_module.c:    ngx_eventfd_conn.log = cycle->log;
+src/event/modules/ngx_epoll_module.c:    ngx_log_error(NGX_LOG_EMERG, cycle->log, ngx_errno,
+src/event/modules/ngx_epoll_module.c:        ngx_log_error(NGX_LOG_ALERT, cycle->log, ngx_errno,
+src/event/modules/ngx_epoll_module.c:        ngx_log_error(NGX_LOG_ALERT, cycle->log, ngx_errno,
+src/event/modules/ngx_epoll_module.c:    epcf = ngx_event_get_conf(cycle->conf_ctx, ngx_epoll_module);
+src/event/modules/ngx_epoll_module.c:        ep = epoll_create(cycle->connection_n / 2);
+src/event/modules/ngx_epoll_module.c:            ngx_log_error(NGX_LOG_EMERG, cycle->log, ngx_errno,
+src/event/modules/ngx_epoll_module.c:        if (ngx_epoll_notify_init(cycle->log) != NGX_OK) {
+src/event/modules/ngx_epoll_module.c:                               cycle->log);
+src/event/modules/ngx_epoll_module.c:        ngx_log_error(NGX_LOG_ALERT, cycle->log, ngx_errno,
+src/event/modules/ngx_epoll_module.c:        ngx_log_error(NGX_LOG_ALERT, cycle->log, ngx_errno,
+src/event/modules/ngx_epoll_module.c:        ngx_log_error(NGX_LOG_ALERT, cycle->log, ngx_errno,
+src/event/modules/ngx_epoll_module.c:        ngx_log_error(NGX_LOG_ALERT, cycle->log, ngx_errno,
+src/event/modules/ngx_epoll_module.c:        ngx_log_error(NGX_LOG_ALERT, cycle->log, NGX_ETIMEDOUT,
+src/event/modules/ngx_epoll_module.c:    ngx_log_debug1(NGX_LOG_DEBUG_EVENT, cycle->log, 0,
+src/event/modules/ngx_epoll_module.c:        ngx_log_error(NGX_LOG_ALERT, cycle->log, ngx_errno,
+src/event/modules/ngx_epoll_module.c:        ngx_log_error(NGX_LOG_ALERT, cycle->log, ngx_errno,
+src/event/modules/ngx_epoll_module.c:        ngx_log_error(NGX_LOG_ALERT, cycle->log, ngx_errno,
+src/event/modules/ngx_epoll_module.c:        ngx_log_error(NGX_LOG_ALERT, cycle->log, ngx_errno,
+src/event/modules/ngx_epoll_module.c:            ngx_log_error(NGX_LOG_ALERT, cycle->log, ngx_errno,
+src/event/modules/ngx_epoll_module.c:            ngx_log_error(NGX_LOG_ALERT, cycle->log, ngx_errno,
+src/event/modules/ngx_epoll_module.c:    ngx_log_debug1(NGX_LOG_DEBUG_EVENT, cycle->log, 0,
+src/event/modules/ngx_epoll_module.c:        ngx_log_error(level, cycle->log, err, "epoll_wait() failed");
+src/event/modules/ngx_epoll_module.c:        ngx_log_error(NGX_LOG_ALERT, cycle->log, 0,
+src/event/modules/ngx_epoll_module.c:            ngx_log_debug1(NGX_LOG_DEBUG_EVENT, cycle->log, 0,
+src/event/modules/ngx_epoll_module.c:        ngx_log_debug3(NGX_LOG_DEBUG_EVENT, cycle->log, 0,
+src/event/modules/ngx_epoll_module.c:            ngx_log_debug2(NGX_LOG_DEBUG_EVENT, cycle->log, 0,
+src/event/modules/ngx_epoll_module.c:            ngx_log_error(NGX_LOG_ALERT, cycle->log, 0,
+src/event/modules/ngx_epoll_module.c:                ngx_log_debug1(NGX_LOG_DEBUG_EVENT, cycle->log, 0,
+src/event/modules/ngx_epoll_module.c:    epcf = ngx_palloc(cycle->pool, sizeof(ngx_epoll_conf_t));
+src/event/modules/ngx_eventport_module.c:    epcf = ngx_event_get_conf(cycle->conf_ctx, ngx_eventport_module);
+src/event/modules/ngx_eventport_module.c:            ngx_log_error(NGX_LOG_EMERG, cycle->log, ngx_errno,
+src/event/modules/ngx_eventport_module.c:        notify_event.log = cycle->log;
+src/event/modules/ngx_eventport_module.c:                               cycle->log);
+src/event/modules/ngx_eventport_module.c:            ngx_log_error(NGX_LOG_EMERG, cycle->log, ngx_errno,
+src/event/modules/ngx_eventport_module.c:            ngx_log_error(NGX_LOG_EMERG, cycle->log, ngx_errno,
+src/event/modules/ngx_eventport_module.c:            ngx_log_error(NGX_LOG_ALERT, cycle->log, ngx_errno,
+src/event/modules/ngx_eventport_module.c:        ngx_log_error(NGX_LOG_ALERT, cycle->log, ngx_errno,
+src/event/modules/ngx_eventport_module.c:    ngx_log_debug1(NGX_LOG_DEBUG_EVENT, cycle->log, 0,
+src/event/modules/ngx_eventport_module.c:            ngx_log_error(NGX_LOG_ALERT, cycle->log, 0,
+src/event/modules/ngx_eventport_module.c:        ngx_log_error(level, cycle->log, err, "port_getn() failed");
+src/event/modules/ngx_eventport_module.c:        ngx_log_error(NGX_LOG_ALERT, cycle->log, 0,
+src/event/modules/ngx_eventport_module.c:                ngx_log_debug1(NGX_LOG_DEBUG_EVENT, cycle->log, 0,
+src/event/modules/ngx_eventport_module.c:            ngx_log_debug2(NGX_LOG_DEBUG_EVENT, cycle->log, 0,
+src/event/modules/ngx_eventport_module.c:                ngx_log_debug2(NGX_LOG_DEBUG_EVENT, cycle->log, 0,
+src/event/modules/ngx_eventport_module.c:                ngx_log_error(NGX_LOG_ALERT, cycle->log, 0,
+src/event/modules/ngx_eventport_module.c:            ngx_log_error(NGX_LOG_ALERT, cycle->log, 0,
+src/event/modules/ngx_eventport_module.c:    epcf = ngx_palloc(cycle->pool, sizeof(ngx_eventport_conf_t));
+src/event/modules/ngx_iocp_module.c:    cf = ngx_event_get_conf(cycle->conf_ctx, ngx_iocp_module);
+src/event/modules/ngx_iocp_module.c:        ngx_log_error(NGX_LOG_ALERT, cycle->log, ngx_errno,
+src/event/modules/ngx_iocp_module.c:        if (ngx_create_thread(&timer_thread, ngx_iocp_timer, &msec, cycle->log)
+src/event/modules/ngx_iocp_module.c:    ngx_log_debug2(NGX_LOG_DEBUG_EVENT, ngx_cycle->log, 0,
+src/event/modules/ngx_iocp_module.c:        ngx_log_debug0(NGX_LOG_DEBUG_EVENT, ngx_cycle->log, 0, "timer");
+src/event/modules/ngx_iocp_module.c:        ngx_log_error(NGX_LOG_ALERT, cycle->log, ngx_errno,
+src/event/modules/ngx_iocp_module.c:    ngx_log_debug1(NGX_LOG_DEBUG_EVENT, cycle->log, 0, "iocp timer: %M", timer);
+src/event/modules/ngx_iocp_module.c:    ngx_log_debug4(NGX_LOG_DEBUG_EVENT, cycle->log, 0,
+src/event/modules/ngx_iocp_module.c:        ngx_log_debug2(NGX_LOG_DEBUG_EVENT, cycle->log, 0,
+src/event/modules/ngx_iocp_module.c:                ngx_log_error(NGX_LOG_ALERT, cycle->log, err,
+src/event/modules/ngx_iocp_module.c:        ngx_log_error(NGX_LOG_ALERT, cycle->log, 0,
+src/event/modules/ngx_iocp_module.c:    ngx_log_debug1(NGX_LOG_DEBUG_EVENT, cycle->log, err, "iocp event:%p", ev);
+src/event/modules/ngx_iocp_module.c:        ngx_log_debug1(NGX_LOG_DEBUG_EVENT, cycle->log, err,
+src/event/modules/ngx_iocp_module.c:        ngx_log_error(NGX_LOG_ALERT, cycle->log, err,
+src/event/modules/ngx_iocp_module.c:    ngx_log_debug1(NGX_LOG_DEBUG_EVENT, cycle->log, 0,
+src/event/modules/ngx_iocp_module.c:    cf = ngx_palloc(cycle->pool, sizeof(ngx_iocp_conf_t));
+src/event/modules/ngx_kqueue_module.c:    kcf = ngx_event_get_conf(cycle->conf_ctx, ngx_kqueue_module);
+src/event/modules/ngx_kqueue_module.c:            ngx_log_error(NGX_LOG_EMERG, cycle->log, ngx_errno,
+src/event/modules/ngx_kqueue_module.c:        if (ngx_kqueue_notify_init(cycle->log) != NGX_OK) {
+src/event/modules/ngx_kqueue_module.c:                ngx_log_error(NGX_LOG_ALERT, cycle->log, ngx_errno,
+src/event/modules/ngx_kqueue_module.c:                                cycle->log);
+src/event/modules/ngx_kqueue_module.c:        event_list = ngx_alloc(kcf->events * sizeof(struct kevent), cycle->log);
+src/event/modules/ngx_kqueue_module.c:            ngx_log_error(NGX_LOG_ALERT, cycle->log, ngx_errno,
+src/event/modules/ngx_kqueue_module.c:        ngx_log_error(NGX_LOG_ALERT, cycle->log, ngx_errno,
+src/event/modules/ngx_kqueue_module.c:    ngx_log_debug2(NGX_LOG_DEBUG_EVENT, cycle->log, 0,
+src/event/modules/ngx_kqueue_module.c:    ngx_log_debug1(NGX_LOG_DEBUG_EVENT, cycle->log, 0,
+src/event/modules/ngx_kqueue_module.c:        ngx_log_error(level, cycle->log, err, "kevent() failed");
+src/event/modules/ngx_kqueue_module.c:        ngx_log_error(NGX_LOG_ALERT, cycle->log, 0,
+src/event/modules/ngx_kqueue_module.c:        ngx_kqueue_dump_event(cycle->log, &event_list[i]);
+src/event/modules/ngx_kqueue_module.c:            ngx_log_error(NGX_LOG_ALERT, cycle->log, event_list[i].data,
+src/event/modules/ngx_kqueue_module.c:                ngx_log_debug1(NGX_LOG_DEBUG_EVENT, cycle->log, 0,
+src/event/modules/ngx_kqueue_module.c:            ngx_log_error(NGX_LOG_ALERT, cycle->log, 0,
+src/event/modules/ngx_kqueue_module.c:    kcf = ngx_palloc(cycle->pool, sizeof(ngx_kqueue_conf_t));
+src/event/modules/ngx_poll_module.c:        || cycle->old_cycle == NULL
+src/event/modules/ngx_poll_module.c:        || cycle->old_cycle->connection_n < cycle->connection_n)
+src/event/modules/ngx_poll_module.c:        list = ngx_alloc(sizeof(struct pollfd) * cycle->connection_n,
+src/event/modules/ngx_poll_module.c:                         cycle->log);
+src/event/modules/ngx_poll_module.c:            c = ngx_cycle->files[event_list[nevents].fd];
+src/event/modules/ngx_poll_module.c:    if (cycle->log->log_level & NGX_LOG_DEBUG_ALL) {
+src/event/modules/ngx_poll_module.c:            ngx_log_debug3(NGX_LOG_DEBUG_EVENT, cycle->log, 0,
+src/event/modules/ngx_poll_module.c:    ngx_log_debug1(NGX_LOG_DEBUG_EVENT, cycle->log, 0, "poll timer: %M", timer);
+src/event/modules/ngx_poll_module.c:    ngx_log_debug2(NGX_LOG_DEBUG_EVENT, cycle->log, 0,
+src/event/modules/ngx_poll_module.c:        ngx_log_error(level, cycle->log, err, "poll() failed");
+src/event/modules/ngx_poll_module.c:        ngx_log_error(NGX_LOG_ALERT, cycle->log, 0,
+src/event/modules/ngx_poll_module.c:        ngx_log_debug4(NGX_LOG_DEBUG_EVENT, cycle->log, 0,
+src/event/modules/ngx_poll_module.c:            ngx_log_debug4(NGX_LOG_DEBUG_EVENT, cycle->log, 0,
+src/event/modules/ngx_poll_module.c:            ngx_log_error(NGX_LOG_ALERT, cycle->log, 0,
+src/event/modules/ngx_poll_module.c:            ngx_log_error(NGX_LOG_ALERT, cycle->log, 0,
+src/event/modules/ngx_poll_module.c:        c = ngx_cycle->files[event_list[i].fd];
+src/event/modules/ngx_poll_module.c:            ngx_log_error(NGX_LOG_ALERT, cycle->log, 0, "unexpected event");
+src/event/modules/ngx_poll_module.c:        ngx_log_error(NGX_LOG_ALERT, cycle->log, 0, "poll ready != events");
+src/event/modules/ngx_poll_module.c:    ecf = ngx_event_get_conf(cycle->conf_ctx, ngx_event_core_module);
+src/event/modules/ngx_select_module.c:        || cycle->old_cycle == NULL
+src/event/modules/ngx_select_module.c:        || cycle->old_cycle->connection_n < cycle->connection_n)
+src/event/modules/ngx_select_module.c:        index = ngx_alloc(sizeof(ngx_event_t *) * 2 * cycle->connection_n,
+src/event/modules/ngx_select_module.c:                          cycle->log);
+src/event/modules/ngx_select_module.c:        ngx_log_debug1(NGX_LOG_DEBUG_EVENT, cycle->log, 0,
+src/event/modules/ngx_select_module.c:    if (cycle->log->log_level & NGX_LOG_DEBUG_ALL) {
+src/event/modules/ngx_select_module.c:            ngx_log_debug2(NGX_LOG_DEBUG_EVENT, cycle->log, 0,
+src/event/modules/ngx_select_module.c:        ngx_log_debug1(NGX_LOG_DEBUG_EVENT, cycle->log, 0,
+src/event/modules/ngx_select_module.c:    ngx_log_debug1(NGX_LOG_DEBUG_EVENT, cycle->log, 0,
+src/event/modules/ngx_select_module.c:    ngx_log_debug1(NGX_LOG_DEBUG_EVENT, cycle->log, 0,
+src/event/modules/ngx_select_module.c:        ngx_log_error(level, cycle->log, err, "select() failed");
+src/event/modules/ngx_select_module.c:        ngx_log_error(NGX_LOG_ALERT, cycle->log, 0,
+src/event/modules/ngx_select_module.c:                ngx_log_debug1(NGX_LOG_DEBUG_EVENT, cycle->log, 0,
+src/event/modules/ngx_select_module.c:                ngx_log_debug1(NGX_LOG_DEBUG_EVENT, cycle->log, 0,
+src/event/modules/ngx_select_module.c:        ngx_log_error(NGX_LOG_ALERT, cycle->log, 0,
+src/event/modules/ngx_select_module.c:            ngx_log_error(NGX_LOG_ALERT, cycle->log, err,
+src/event/modules/ngx_select_module.c:            ngx_log_error(NGX_LOG_ALERT, cycle->log, err,
+src/event/modules/ngx_select_module.c:    ecf = ngx_event_get_conf(cycle->conf_ctx, ngx_event_core_module);
+src/event/modules/ngx_select_module.c:    if (cycle->connection_n > FD_SETSIZE) {
+src/event/modules/ngx_select_module.c:        ngx_log_error(NGX_LOG_EMERG, cycle->log, 0,
+src/event/modules/ngx_win32_poll_module.c:        || cycle->old_cycle == NULL
+src/event/modules/ngx_win32_poll_module.c:        || cycle->old_cycle->connection_n < cycle->connection_n)
+src/event/modules/ngx_win32_poll_module.c:        list = ngx_alloc(sizeof(struct pollfd) * cycle->connection_n,
+src/event/modules/ngx_win32_poll_module.c:                         cycle->log);
+src/event/modules/ngx_win32_poll_module.c:        index = ngx_alloc(sizeof(ngx_connection_t *) * cycle->connection_n,
+src/event/modules/ngx_win32_poll_module.c:                          cycle->log);
+src/event/modules/ngx_win32_poll_module.c:    if (cycle->log->log_level & NGX_LOG_DEBUG_ALL) {
+src/event/modules/ngx_win32_poll_module.c:            ngx_log_debug3(NGX_LOG_DEBUG_EVENT, cycle->log, 0,
+src/event/modules/ngx_win32_poll_module.c:    ngx_log_debug1(NGX_LOG_DEBUG_EVENT, cycle->log, 0, "poll timer: %M", timer);
+src/event/modules/ngx_win32_poll_module.c:    ngx_log_debug2(NGX_LOG_DEBUG_EVENT, cycle->log, 0,
+src/event/modules/ngx_win32_poll_module.c:        ngx_log_error(NGX_LOG_ALERT, cycle->log, err, "WSAPoll() failed");
+src/event/modules/ngx_win32_poll_module.c:        ngx_log_error(NGX_LOG_ALERT, cycle->log, 0,
+src/event/modules/ngx_win32_poll_module.c:        ngx_log_debug4(NGX_LOG_DEBUG_EVENT, cycle->log, 0,
+src/event/modules/ngx_win32_poll_module.c:            ngx_log_debug4(NGX_LOG_DEBUG_EVENT, cycle->log, 0,
+src/event/modules/ngx_win32_poll_module.c:            ngx_log_error(NGX_LOG_ALERT, cycle->log, 0,
+src/event/modules/ngx_win32_poll_module.c:            ngx_log_error(NGX_LOG_ALERT, cycle->log, 0,
+src/event/modules/ngx_win32_poll_module.c:            ngx_log_error(NGX_LOG_ALERT, cycle->log, 0, "unexpected event");
+src/event/modules/ngx_win32_poll_module.c:        ngx_log_error(NGX_LOG_ALERT, cycle->log, 0, "poll ready != events");
+src/event/modules/ngx_win32_poll_module.c:    ecf = ngx_event_get_conf(cycle->conf_ctx, ngx_event_core_module);
+src/event/modules/ngx_win32_poll_module.c:        ngx_log_error(NGX_LOG_EMERG, cycle->log, 0,
+src/event/modules/ngx_win32_select_module.c:        || cycle->old_cycle == NULL
+src/event/modules/ngx_win32_select_module.c:        || cycle->old_cycle->connection_n < cycle->connection_n)
+src/event/modules/ngx_win32_select_module.c:        index = ngx_alloc(sizeof(ngx_event_t *) * 2 * cycle->connection_n,
+src/event/modules/ngx_win32_select_module.c:                          cycle->log);
+src/event/modules/ngx_win32_select_module.c:    if (cycle->log->log_level & NGX_LOG_DEBUG_ALL) {
+src/event/modules/ngx_win32_select_module.c:            ngx_log_debug2(NGX_LOG_DEBUG_EVENT, cycle->log, 0,
+src/event/modules/ngx_win32_select_module.c:    ngx_log_debug1(NGX_LOG_DEBUG_EVENT, cycle->log, 0,
+src/event/modules/ngx_win32_select_module.c:    ngx_log_debug1(NGX_LOG_DEBUG_EVENT, cycle->log, 0,
+src/event/modules/ngx_win32_select_module.c:        ngx_log_error(NGX_LOG_ALERT, cycle->log, err, "select() failed");
+src/event/modules/ngx_win32_select_module.c:        ngx_log_error(NGX_LOG_ALERT, cycle->log, 0,
+src/event/modules/ngx_win32_select_module.c:                ngx_log_debug1(NGX_LOG_DEBUG_EVENT, cycle->log, 0,
+src/event/modules/ngx_win32_select_module.c:                ngx_log_debug1(NGX_LOG_DEBUG_EVENT, cycle->log, 0,
+src/event/modules/ngx_win32_select_module.c:                ngx_log_debug1(NGX_LOG_DEBUG_EVENT, cycle->log, 0,
+src/event/modules/ngx_win32_select_module.c:        ngx_log_error(NGX_LOG_ALERT, cycle->log, 0,
+src/event/modules/ngx_win32_select_module.c:            ngx_log_error(NGX_LOG_ALERT, cycle->log, err,
+src/event/modules/ngx_win32_select_module.c:            ngx_log_error(NGX_LOG_ALERT, cycle->log, err,
+src/event/modules/ngx_win32_select_module.c:    ecf = ngx_event_get_conf(cycle->conf_ctx, ngx_event_core_module);
+src/event/ngx_event.c:    ngx_log_debug1(NGX_LOG_DEBUG_EVENT, cycle->log, 0,
+src/event/ngx_event.c:    if (ngx_get_conf(cycle->conf_ctx, ngx_events_module) == NULL) {
+src/event/ngx_event.c:        ngx_log_error(NGX_LOG_EMERG, cycle->log, 0,
+src/event/ngx_event.c:    if (cycle->connection_n < cycle->listening.nelts + 1) {
+src/event/ngx_event.c:        ngx_log_error(NGX_LOG_EMERG, cycle->log, 0,
+src/event/ngx_event.c:                      cycle->connection_n, cycle->listening.nelts);
+src/event/ngx_event.c:    ls = cycle->listening.elts;
+src/event/ngx_event.c:    for (i = 0; i < cycle->listening.nelts; i++) {
+src/event/ngx_event.c:        /* cloning may change cycle->listening.elts */
+src/event/ngx_event.c:        ls = cycle->listening.elts;
+src/event/ngx_event.c:    cf = ngx_get_conf(cycle->conf_ctx, ngx_events_module);
+src/event/ngx_event.c:        ngx_log_error(NGX_LOG_NOTICE, cycle->log, 0,
+src/event/ngx_event.c:    ccf = (ngx_core_conf_t *) ngx_get_conf(cycle->conf_ctx, ngx_core_module);
+src/event/ngx_event.c:        ngx_log_error(NGX_LOG_ALERT, cycle->log, ngx_errno,
+src/event/ngx_event.c:            ngx_log_error(NGX_LOG_WARN, cycle->log, 0,
+src/event/ngx_event.c:    shm.log = cycle->log;
+src/event/ngx_event.c:                         cycle->lock_file.data)
+src/event/ngx_event.c:    ngx_log_debug2(NGX_LOG_DEBUG_EVENT, cycle->log, 0,
+src/event/ngx_event.c:    ngx_log_debug0(NGX_LOG_DEBUG_EVENT, ngx_cycle->log, 0, "timer signal");
+src/event/ngx_event.c:    ccf = (ngx_core_conf_t *) ngx_get_conf(cycle->conf_ctx, ngx_core_module);
+src/event/ngx_event.c:    ecf = ngx_event_get_conf(cycle->conf_ctx, ngx_event_core_module);
+src/event/ngx_event.c:    if (ngx_event_timer_init(cycle->log) == NGX_ERROR) {
+src/event/ngx_event.c:    for (m = 0; cycle->modules[m]; m++) {
+src/event/ngx_event.c:        if (cycle->modules[m]->type != NGX_EVENT_MODULE) {
+src/event/ngx_event.c:        if (cycle->modules[m]->ctx_index != ecf->use) {
+src/event/ngx_event.c:        module = cycle->modules[m]->ctx;
+src/event/ngx_event.c:            ngx_log_error(NGX_LOG_ALERT, cycle->log, ngx_errno,
+src/event/ngx_event.c:            ngx_log_error(NGX_LOG_ALERT, cycle->log, ngx_errno,
+src/event/ngx_event.c:            ngx_log_error(NGX_LOG_ALERT, cycle->log, ngx_errno,
+src/event/ngx_event.c:        cycle->files_n = (ngx_uint_t) rlmt.rlim_cur;
+src/event/ngx_event.c:        cycle->files = ngx_calloc(sizeof(ngx_connection_t *) * cycle->files_n,
+src/event/ngx_event.c:                                  cycle->log);
+src/event/ngx_event.c:        if (cycle->files == NULL) {
+src/event/ngx_event.c:        ngx_log_error(NGX_LOG_WARN, cycle->log, 0,
+src/event/ngx_event.c:    cycle->connections =
+src/event/ngx_event.c:        ngx_alloc(sizeof(ngx_connection_t) * cycle->connection_n, cycle->log);
+src/event/ngx_event.c:    if (cycle->connections == NULL) {
+src/event/ngx_event.c:    c = cycle->connections;
+src/event/ngx_event.c:    cycle->read_events = ngx_alloc(sizeof(ngx_event_t) * cycle->connection_n,
+src/event/ngx_event.c:                                   cycle->log);
+src/event/ngx_event.c:    if (cycle->read_events == NULL) {
+src/event/ngx_event.c:    rev = cycle->read_events;
+src/event/ngx_event.c:    for (i = 0; i < cycle->connection_n; i++) {
+src/event/ngx_event.c:    cycle->write_events = ngx_alloc(sizeof(ngx_event_t) * cycle->connection_n,
+src/event/ngx_event.c:                                    cycle->log);
+src/event/ngx_event.c:    if (cycle->write_events == NULL) {
+src/event/ngx_event.c:    wev = cycle->write_events;
+src/event/ngx_event.c:    for (i = 0; i < cycle->connection_n; i++) {
+src/event/ngx_event.c:    i = cycle->connection_n;
+src/event/ngx_event.c:        c[i].read = &cycle->read_events[i];
+src/event/ngx_event.c:        c[i].write = &cycle->write_events[i];
+src/event/ngx_event.c:    cycle->free_connections = next;
+src/event/ngx_event.c:    cycle->free_connection_n = cycle->connection_n;
+src/event/ngx_event.c:    ls = cycle->listening.elts;
+src/event/ngx_event.c:    for (i = 0; i < cycle->listening.nelts; i++) {
+src/event/ngx_event.c:        c = ngx_get_connection(ls[i].fd, cycle->log);
+src/event/ngx_event.c:            iocpcf = ngx_event_get_conf(cycle->conf_ctx, ngx_iocp_module);
+src/event/ngx_event.c:    for (i = 0; cf->cycle->modules[i]; i++) {
+src/event/ngx_event.c:        if (cf->cycle->modules[i]->type != NGX_EVENT_MODULE) {
+src/event/ngx_event.c:        m = cf->cycle->modules[i]->ctx;
+src/event/ngx_event.c:            (*ctx)[cf->cycle->modules[i]->ctx_index] =
+src/event/ngx_event.c:            if ((*ctx)[cf->cycle->modules[i]->ctx_index] == NULL) {
+src/event/ngx_event.c:    for (i = 0; cf->cycle->modules[i]; i++) {
+src/event/ngx_event.c:        if (cf->cycle->modules[i]->type != NGX_EVENT_MODULE) {
+src/event/ngx_event.c:        m = cf->cycle->modules[i]->ctx;
+src/event/ngx_event.c:                              (*ctx)[cf->cycle->modules[i]->ctx_index]);
+src/event/ngx_event.c:    cf->cycle->connection_n = ecf->connections;
+src/event/ngx_event.c:    if (cf->cycle->old_cycle->conf_ctx) {
+src/event/ngx_event.c:        old_ecf = ngx_event_get_conf(cf->cycle->old_cycle->conf_ctx,
+src/event/ngx_event.c:    for (m = 0; cf->cycle->modules[m]; m++) {
+src/event/ngx_event.c:        if (cf->cycle->modules[m]->type != NGX_EVENT_MODULE) {
+src/event/ngx_event.c:        module = cf->cycle->modules[m]->ctx;
+src/event/ngx_event.c:                ecf->use = cf->cycle->modules[m]->ctx_index;
+src/event/ngx_event.c:    ecf = ngx_palloc(cycle->pool, sizeof(ngx_event_conf_t));
+src/event/ngx_event.c:    if (ngx_array_init(&ecf->debug_connection, cycle->pool, 4,
+src/event/ngx_event.c:        for (i = 0; cycle->modules[i]; i++) {
+src/event/ngx_event.c:            if (cycle->modules[i]->type != NGX_EVENT_MODULE) {
+src/event/ngx_event.c:            event_module = cycle->modules[i]->ctx;
+src/event/ngx_event.c:            module = cycle->modules[i];
+src/event/ngx_event.c:        ngx_log_error(NGX_LOG_EMERG, cycle->log, 0, "no events module found");
+src/event/ngx_event.c:    cycle->connection_n = ecf->connections;
+src/event/ngx_event_accept.c:    ecf = ngx_event_get_conf(ngx_cycle->conf_ctx, ngx_event_core_module);
+src/event/ngx_event_accept.c:        ngx_accept_disabled = ngx_cycle->connection_n / 8
+src/event/ngx_event_accept.c:                              - ngx_cycle->free_connection_n;
+src/event/ngx_event_accept.c:        ngx_log_debug0(NGX_LOG_DEBUG_EVENT, cycle->log, 0,
+src/event/ngx_event_accept.c:    ngx_log_debug1(NGX_LOG_DEBUG_EVENT, cycle->log, 0,
+src/event/ngx_event_accept.c:    ls = cycle->listening.elts;
+src/event/ngx_event_accept.c:    for (i = 0; i < cycle->listening.nelts; i++) {
+src/event/ngx_event_accept.c:    ls = cycle->listening.elts;
+src/event/ngx_event_accept.c:    for (i = 0; i < cycle->listening.nelts; i++) {
+src/event/ngx_event_openssl.c:        if (ngx_get_full_name(pool, (ngx_str_t *) &ngx_cycle->conf_prefix, cert)
+src/event/ngx_event_openssl.c:        if (ngx_get_full_name(pool, (ngx_str_t *) &ngx_cycle->conf_prefix, key)
+src/event/ngx_event_openssl.c:        ngx_log_error(NGX_LOG_ALERT, ngx_cycle->log, 0,
+src/event/ngx_event_openssl.c:        ngx_log_error(NGX_LOG_ERR, ngx_cycle->log, 0,
+src/event/ngx_event_openssl.c:    ngx_log_debug2(NGX_LOG_DEBUG_EVENT, ngx_cycle->log, 0,
+src/event/ngx_event_openssl.c:        ngx_log_debug1(NGX_LOG_DEBUG_EVENT, ngx_cycle->log, 0,
+src/event/ngx_event_openssl.c:    oscf = ngx_pcalloc(cycle->pool, sizeof(ngx_openssl_conf_t));
+src/event/ngx_event_openssl_stapling.c:    pool = ngx_create_pool(2048, ngx_cycle->log);
+src/event/ngx_event_posted.c:        ngx_log_debug1(NGX_LOG_DEBUG_EVENT, cycle->log, 0,
+src/event/ngx_event_posted.c:        ngx_log_debug1(NGX_LOG_DEBUG_EVENT, cycle->log, 0,
+src/event/ngx_event_udp.c:    ecf = ngx_event_get_conf(ngx_cycle->conf_ctx, ngx_event_core_module);
+src/event/ngx_event_udp.c:        ngx_accept_disabled = ngx_cycle->connection_n / 8
+src/event/ngx_event_udp.c:                              - ngx_cycle->free_connection_n;
+src/event/ngx_event_udp.c:            ngx_log_debug0(NGX_LOG_DEBUG_EVENT, ngx_cycle->log, 0,
+src/http/modules/ngx_http_limit_req_module.c:            ngx_log_error(NGX_LOG_ALERT, ngx_cycle->log, 0,
+src/http/modules/ngx_http_log_module.c:                   + ngx_cycle->hostname.len + 1
+src/http/modules/ngx_http_log_module.c:            buffer->event->log = &cf->cycle->new_log;
+src/http/modules/ngx_http_rewrite_module.c:    for (i = 0; cf->cycle->modules[i]; i++) {
+src/http/modules/ngx_http_rewrite_module.c:        if (cf->cycle->modules[i]->type != NGX_HTTP_MODULE) {
+src/http/modules/ngx_http_rewrite_module.c:        module = cf->cycle->modules[i]->ctx;
+src/http/modules/ngx_http_rewrite_module.c:            ctx->loc_conf[cf->cycle->modules[i]->ctx_index] = mconf;
+src/http/modules/ngx_http_upstream_keepalive_module.c:    c->log = ngx_cycle->log;
+src/http/modules/ngx_http_upstream_keepalive_module.c:    c->read->log = ngx_cycle->log;
+src/http/modules/ngx_http_upstream_keepalive_module.c:    c->write->log = ngx_cycle->log;
+src/http/modules/ngx_http_upstream_keepalive_module.c:    c->pool->log = ngx_cycle->log;
+src/http/modules/ngx_http_upstream_random_module.c:    ranges = pool ? ngx_palloc(pool, size) : ngx_alloc(size, ngx_cycle->log);
+src/http/modules/perl/ngx_http_perl_module.c:        ngx_log_debug0(NGX_LOG_DEBUG_HTTP, ngx_cycle->log, 0, "perl term");
+src/http/modules/perl/ngx_http_perl_module.c:        ngx_log_debug0(NGX_LOG_DEBUG_HTTP, cycle->log, 0, "perl term");
+src/http/ngx_http.c:    for (m = 0; cf->cycle->modules[m]; m++) {
+src/http/ngx_http.c:        if (cf->cycle->modules[m]->type != NGX_HTTP_MODULE) {
+src/http/ngx_http.c:        module = cf->cycle->modules[m]->ctx;
+src/http/ngx_http.c:        mi = cf->cycle->modules[m]->ctx_index;
+src/http/ngx_http.c:    for (m = 0; cf->cycle->modules[m]; m++) {
+src/http/ngx_http.c:        if (cf->cycle->modules[m]->type != NGX_HTTP_MODULE) {
+src/http/ngx_http.c:        module = cf->cycle->modules[m]->ctx;
+src/http/ngx_http.c:    for (m = 0; cf->cycle->modules[m]; m++) {
+src/http/ngx_http.c:        if (cf->cycle->modules[m]->type != NGX_HTTP_MODULE) {
+src/http/ngx_http.c:        module = cf->cycle->modules[m]->ctx;
+src/http/ngx_http.c:        mi = cf->cycle->modules[m]->ctx_index;
+src/http/ngx_http.c:    for (m = 0; cf->cycle->modules[m]; m++) {
+src/http/ngx_http.c:        if (cf->cycle->modules[m]->type != NGX_HTTP_MODULE) {
+src/http/ngx_http.c:        module = cf->cycle->modules[m]->ctx;
+src/http/ngx_http.c:    if (ngx_get_conf(cf->cycle->conf_ctx, ngx_events_module)) {
+src/http/ngx_http.c:        iocpcf = ngx_event_get_conf(cf->cycle->conf_ctx, ngx_iocp_module);
+src/http/ngx_http_config.h:    (cycle->conf_ctx[ngx_http_module.index] ?                                 \
+src/http/ngx_http_config.h:        ((ngx_http_conf_ctx_t *) cycle->conf_ctx[ngx_http_module.index])      \
+src/http/ngx_http_core_module.c:        if (ngx_get_full_name(r->pool, (ngx_str_t *) &ngx_cycle->prefix, path)
+src/http/ngx_http_core_module.c:    for (i = 0; cf->cycle->modules[i]; i++) {
+src/http/ngx_http_core_module.c:        if (cf->cycle->modules[i]->type != NGX_HTTP_MODULE) {
+src/http/ngx_http_core_module.c:        module = cf->cycle->modules[i]->ctx;
+src/http/ngx_http_core_module.c:            ctx->srv_conf[cf->cycle->modules[i]->ctx_index] = mconf;
+src/http/ngx_http_core_module.c:            ctx->loc_conf[cf->cycle->modules[i]->ctx_index] = mconf;
+src/http/ngx_http_core_module.c:    for (i = 0; cf->cycle->modules[i]; i++) {
+src/http/ngx_http_core_module.c:        if (cf->cycle->modules[i]->type != NGX_HTTP_MODULE) {
+src/http/ngx_http_core_module.c:        module = cf->cycle->modules[i]->ctx;
+src/http/ngx_http_core_module.c:            ctx->loc_conf[cf->cycle->modules[i]->ctx_index] =
+src/http/ngx_http_core_module.c:            if (ctx->loc_conf[cf->cycle->modules[i]->ctx_index] == NULL) {
+src/http/ngx_http_core_module.c:            conf->error_log = &cf->cycle->new_log;
+src/http/ngx_http_core_module.c:            sn->name = cf->cycle->hostname;
+src/http/ngx_http_core_module.c:    for (i = 0; cf->cycle->modules[i]; i++) {
+src/http/ngx_http_core_module.c:        if (cf->cycle->modules[i]->type != NGX_HTTP_MODULE) {
+src/http/ngx_http_core_module.c:        module = cf->cycle->modules[i]->ctx;
+src/http/ngx_http_core_module.c:            ctx->loc_conf[cf->cycle->modules[i]->ctx_index] = mconf;
+src/http/ngx_http_file_cache.c:            ngx_log_error(NGX_LOG_ALERT, ngx_cycle->log, 0,
+src/http/ngx_http_file_cache.c:    ngx_log_debug0(NGX_LOG_DEBUG_HTTP, ngx_cycle->log, 0,
+src/http/ngx_http_file_cache.c:    name = ngx_alloc(len + 1, ngx_cycle->log);
+src/http/ngx_http_file_cache.c:        ngx_log_debug6(NGX_LOG_DEBUG_HTTP, ngx_cycle->log, 0,
+src/http/ngx_http_file_cache.c:        ngx_log_error(NGX_LOG_ALERT, ngx_cycle->log, 0,
+src/http/ngx_http_file_cache.c:    ngx_log_debug0(NGX_LOG_DEBUG_HTTP, ngx_cycle->log, 0,
+src/http/ngx_http_file_cache.c:    name = ngx_alloc(len + 1, ngx_cycle->log);
+src/http/ngx_http_file_cache.c:        ngx_log_debug6(NGX_LOG_DEBUG_HTTP, ngx_cycle->log, 0,
+src/http/ngx_http_file_cache.c:        ngx_log_error(NGX_LOG_ALERT, ngx_cycle->log, 0,
+src/http/ngx_http_file_cache.c:        ngx_log_debug1(NGX_LOG_DEBUG_HTTP, ngx_cycle->log, 0,
+src/http/ngx_http_file_cache.c:            ngx_log_error(NGX_LOG_CRIT, ngx_cycle->log, ngx_errno,
+src/http/ngx_http_file_cache.c:        ngx_log_debug3(NGX_LOG_DEBUG_HTTP, ngx_cycle->log, 0,
+src/http/ngx_http_file_cache.c:    ngx_log_debug3(NGX_LOG_DEBUG_HTTP, ngx_cycle->log, 0,
+src/http/ngx_http_file_cache.c:    ngx_log_debug0(NGX_LOG_DEBUG_HTTP, ngx_cycle->log, 0,
+src/http/ngx_http_file_cache.c:    tree.log = ngx_cycle->log;
+src/http/ngx_http_file_cache.c:    ngx_log_error(NGX_LOG_NOTICE, ngx_cycle->log, 0,
+src/http/ngx_http_file_cache.c:        ngx_log_debug1(NGX_LOG_DEBUG_HTTP, ngx_cycle->log, 0,
+src/http/ngx_http_file_cache.c:                ngx_log_error(NGX_LOG_ALERT, ngx_cycle->log, 0,
+src/http/ngx_http_file_cache.c:    ngx_log_debug1(NGX_LOG_DEBUG_HTTP, ngx_cycle->log, 0,
+src/http/ngx_http_script.c:    return code->conf_prefix ? ngx_cycle->conf_prefix.len:
+src/http/ngx_http_script.c:                               ngx_cycle->prefix.len;
+src/http/ngx_http_script.c:    prefix = code->conf_prefix ? (ngx_str_t *) &ngx_cycle->conf_prefix:
+src/http/ngx_http_script.c:                                 (ngx_str_t *) &ngx_cycle->prefix;
+src/http/ngx_http_upstream.c:    for (m = 0; cf->cycle->modules[m]; m++) {
+src/http/ngx_http_upstream.c:        if (cf->cycle->modules[m]->type != NGX_HTTP_MODULE) {
+src/http/ngx_http_upstream.c:        module = cf->cycle->modules[m]->ctx;
+src/http/ngx_http_upstream.c:            ctx->srv_conf[cf->cycle->modules[m]->ctx_index] = mconf;
+src/http/ngx_http_upstream.c:            ctx->loc_conf[cf->cycle->modules[m]->ctx_index] = mconf;
+src/http/ngx_http_upstream.c:            ccf = (ngx_core_conf_t *) ngx_get_conf(cf->cycle->conf_ctx,
+src/http/ngx_http_variables.c:        if (ngx_get_full_name(r->pool, (ngx_str_t *) &ngx_cycle->prefix, &path)
+src/http/ngx_http_variables.c:        if (ngx_get_full_name(r->pool, (ngx_str_t *) &ngx_cycle->prefix, &path)
+src/http/ngx_http_variables.c:    v->len = ngx_cycle->hostname.len;
+src/http/ngx_http_variables.c:    v->data = ngx_cycle->hostname.data;
+src/http/v2/ngx_http_v2.c:        h2mcf->recv_buffer = ngx_palloc(ngx_cycle->pool,
+src/mail/ngx_mail.c:    for (m = 0; cf->cycle->modules[m]; m++) {
+src/mail/ngx_mail.c:        if (cf->cycle->modules[m]->type != NGX_MAIL_MODULE) {
+src/mail/ngx_mail.c:        module = cf->cycle->modules[m]->ctx;
+src/mail/ngx_mail.c:        mi = cf->cycle->modules[m]->ctx_index;
+src/mail/ngx_mail.c:    for (m = 0; cf->cycle->modules[m]; m++) {
+src/mail/ngx_mail.c:        if (cf->cycle->modules[m]->type != NGX_MAIL_MODULE) {
+src/mail/ngx_mail.c:        module = cf->cycle->modules[m]->ctx;
+src/mail/ngx_mail.c:        mi = cf->cycle->modules[m]->ctx_index;
+src/mail/ngx_mail_core_module.c:        conf->server_name = cf->cycle->hostname;
+src/mail/ngx_mail_core_module.c:            conf->error_log = &cf->cycle->new_log;
+src/mail/ngx_mail_core_module.c:    for (m = 0; cf->cycle->modules[m]; m++) {
+src/mail/ngx_mail_core_module.c:        if (cf->cycle->modules[m]->type != NGX_MAIL_MODULE) {
+src/mail/ngx_mail_core_module.c:        module = cf->cycle->modules[m]->ctx;
+src/mail/ngx_mail_core_module.c:            ctx->srv_conf[cf->cycle->modules[m]->ctx_index] = mconf;
+src/mail/ngx_mail_core_module.c:        for (m = 0; cf->cycle->modules[m]; m++) {
+src/mail/ngx_mail_core_module.c:            if (cf->cycle->modules[m]->type != NGX_MAIL_MODULE) {
+src/mail/ngx_mail_core_module.c:            module = cf->cycle->modules[m]->ctx;
+src/mail/ngx_mail_core_module.c:    for (m = 0; cf->cycle->modules[m]; m++) {
+src/mail/ngx_mail_core_module.c:        if (cf->cycle->modules[m]->type != NGX_MAIL_MODULE) {
+src/mail/ngx_mail_core_module.c:        module = cf->cycle->modules[m]->ctx;
+src/misc/ngx_google_perftools_module.c:    gptcf = ngx_pcalloc(cycle->pool, sizeof(ngx_google_perftools_conf_t));
+src/misc/ngx_google_perftools_module.c:                ngx_get_conf(cycle->conf_ctx, ngx_google_perftools_module);
+src/misc/ngx_google_perftools_module.c:    profile = ngx_alloc(gptcf->profiles.len + NGX_INT_T_LEN + 2, cycle->log);
+src/misc/ngx_google_perftools_module.c:        ngx_log_error(NGX_LOG_CRIT, cycle->log, ngx_errno,
+src/os/unix/ngx_channel.c:    c = ngx_get_connection(fd, cycle->log);
+src/os/unix/ngx_channel.c:    c->pool = cycle->pool;
+src/os/unix/ngx_channel.c:    rev->log = cycle->log;
+src/os/unix/ngx_channel.c:    wev->log = cycle->log;
+src/os/unix/ngx_process.c:            ngx_log_error(NGX_LOG_ALERT, cycle->log, 0,
+src/os/unix/ngx_process.c:            ngx_log_error(NGX_LOG_ALERT, cycle->log, ngx_errno,
+src/os/unix/ngx_process.c:        ngx_log_debug2(NGX_LOG_DEBUG_CORE, cycle->log, 0,
+src/os/unix/ngx_process.c:            ngx_log_error(NGX_LOG_ALERT, cycle->log, ngx_errno,
+src/os/unix/ngx_process.c:            ngx_close_channel(ngx_processes[s].channel, cycle->log);
+src/os/unix/ngx_process.c:            ngx_log_error(NGX_LOG_ALERT, cycle->log, ngx_errno,
+src/os/unix/ngx_process.c:            ngx_close_channel(ngx_processes[s].channel, cycle->log);
+src/os/unix/ngx_process.c:            ngx_log_error(NGX_LOG_ALERT, cycle->log, ngx_errno,
+src/os/unix/ngx_process.c:            ngx_close_channel(ngx_processes[s].channel, cycle->log);
+src/os/unix/ngx_process.c:            ngx_log_error(NGX_LOG_ALERT, cycle->log, ngx_errno,
+src/os/unix/ngx_process.c:            ngx_close_channel(ngx_processes[s].channel, cycle->log);
+src/os/unix/ngx_process.c:            ngx_log_error(NGX_LOG_ALERT, cycle->log, ngx_errno,
+src/os/unix/ngx_process.c:            ngx_close_channel(ngx_processes[s].channel, cycle->log);
+src/os/unix/ngx_process.c:            ngx_log_error(NGX_LOG_ALERT, cycle->log, ngx_errno,
+src/os/unix/ngx_process.c:            ngx_close_channel(ngx_processes[s].channel, cycle->log);
+src/os/unix/ngx_process.c:        ngx_log_error(NGX_LOG_ALERT, cycle->log, ngx_errno,
+src/os/unix/ngx_process.c:        ngx_close_channel(ngx_processes[s].channel, cycle->log);
+src/os/unix/ngx_process.c:    ngx_log_error(NGX_LOG_NOTICE, cycle->log, 0, "start %s %P", name, pid);
+src/os/unix/ngx_process.c:        ngx_log_error(NGX_LOG_ALERT, cycle->log, ngx_errno,
+src/os/unix/ngx_process.c:        ngx_log_error(NGX_LOG_NOTICE, ngx_cycle->log, 0,
+src/os/unix/ngx_process.c:        ngx_log_error(NGX_LOG_NOTICE, ngx_cycle->log, 0,
+src/os/unix/ngx_process.c:        ngx_log_error(NGX_LOG_CRIT, ngx_cycle->log, 0,
+src/os/unix/ngx_process.c:                ngx_log_error(NGX_LOG_INFO, ngx_cycle->log, err,
+src/os/unix/ngx_process.c:            ngx_log_error(NGX_LOG_ALERT, ngx_cycle->log, err,
+src/os/unix/ngx_process.c:            ngx_log_error(NGX_LOG_ALERT, ngx_cycle->log, 0,
+src/os/unix/ngx_process.c:            ngx_log_error(NGX_LOG_ALERT, ngx_cycle->log, 0,
+src/os/unix/ngx_process.c:            ngx_log_error(NGX_LOG_NOTICE, ngx_cycle->log, 0,
+src/os/unix/ngx_process.c:            ngx_log_error(NGX_LOG_ALERT, ngx_cycle->log, 0,
+src/os/unix/ngx_process.c:    part = (ngx_list_part_t *) &ngx_cycle->shared_memory.part;
+src/os/unix/ngx_process.c:            ngx_log_error(NGX_LOG_ALERT, ngx_cycle->log, 0,
+src/os/unix/ngx_process.c:    ccf = (ngx_core_conf_t *) ngx_get_conf(ngx_cycle->conf_ctx,
+src/os/unix/ngx_process.c:            ngx_log_error(NGX_LOG_ALERT, cycle->log, ngx_errno,
+src/os/unix/ngx_process_cycle.c:        ngx_log_error(NGX_LOG_ALERT, cycle->log, ngx_errno,
+src/os/unix/ngx_process_cycle.c:    title = ngx_pnalloc(cycle->pool, size);
+src/os/unix/ngx_process_cycle.c:    ccf = (ngx_core_conf_t *) ngx_get_conf(cycle->conf_ctx, ngx_core_module);
+src/os/unix/ngx_process_cycle.c:            ngx_log_debug1(NGX_LOG_DEBUG_EVENT, cycle->log, 0,
+src/os/unix/ngx_process_cycle.c:                ngx_log_error(NGX_LOG_ALERT, cycle->log, ngx_errno,
+src/os/unix/ngx_process_cycle.c:        ngx_log_debug0(NGX_LOG_DEBUG_EVENT, cycle->log, 0, "sigsuspend");
+src/os/unix/ngx_process_cycle.c:        ngx_log_debug1(NGX_LOG_DEBUG_EVENT, cycle->log, 0,
+src/os/unix/ngx_process_cycle.c:            ngx_log_debug0(NGX_LOG_DEBUG_EVENT, cycle->log, 0, "reap children");
+src/os/unix/ngx_process_cycle.c:            ls = cycle->listening.elts;
+src/os/unix/ngx_process_cycle.c:            for (n = 0; n < cycle->listening.nelts; n++) {
+src/os/unix/ngx_process_cycle.c:                    ngx_log_error(NGX_LOG_EMERG, cycle->log, ngx_socket_errno,
+src/os/unix/ngx_process_cycle.c:            cycle->listening.nelts = 0;
+src/os/unix/ngx_process_cycle.c:            ngx_log_error(NGX_LOG_NOTICE, cycle->log, 0, "reconfiguring");
+src/os/unix/ngx_process_cycle.c:            ccf = (ngx_core_conf_t *) ngx_get_conf(cycle->conf_ctx,
+src/os/unix/ngx_process_cycle.c:            ngx_log_error(NGX_LOG_NOTICE, cycle->log, 0, "reopening logs");
+src/os/unix/ngx_process_cycle.c:            ngx_log_error(NGX_LOG_NOTICE, cycle->log, 0, "changing binary");
+src/os/unix/ngx_process_cycle.c:    for (i = 0; cycle->modules[i]; i++) {
+src/os/unix/ngx_process_cycle.c:        if (cycle->modules[i]->init_process) {
+src/os/unix/ngx_process_cycle.c:            if (cycle->modules[i]->init_process(cycle) == NGX_ERROR) {
+src/os/unix/ngx_process_cycle.c:        ngx_log_debug0(NGX_LOG_DEBUG_EVENT, cycle->log, 0, "worker cycle");
+src/os/unix/ngx_process_cycle.c:            for (i = 0; cycle->modules[i]; i++) {
+src/os/unix/ngx_process_cycle.c:                if (cycle->modules[i]->exit_process) {
+src/os/unix/ngx_process_cycle.c:                    cycle->modules[i]->exit_process(cycle);
+src/os/unix/ngx_process_cycle.c:            ngx_log_error(NGX_LOG_NOTICE, cycle->log, 0, "reconfiguring");
+src/os/unix/ngx_process_cycle.c:            ngx_log_error(NGX_LOG_NOTICE, cycle->log, 0, "reopening logs");
+src/os/unix/ngx_process_cycle.c:    ngx_log_error(NGX_LOG_NOTICE, cycle->log, 0, "start worker processes");
+src/os/unix/ngx_process_cycle.c:    path = ngx_cycle->paths.elts;
+src/os/unix/ngx_process_cycle.c:    for (i = 0; i < ngx_cycle->paths.nelts; i++) {
+src/os/unix/ngx_process_cycle.c:        ngx_log_debug6(NGX_LOG_DEBUG_CORE, cycle->log, 0,
+src/os/unix/ngx_process_cycle.c:                          ch, sizeof(ngx_channel_t), cycle->log);
+src/os/unix/ngx_process_cycle.c:        ngx_log_debug7(NGX_LOG_DEBUG_EVENT, cycle->log, 0,
+src/os/unix/ngx_process_cycle.c:                                  &ch, sizeof(ngx_channel_t), cycle->log)
+src/os/unix/ngx_process_cycle.c:        ngx_log_debug2(NGX_LOG_DEBUG_CORE, cycle->log, 0,
+src/os/unix/ngx_process_cycle.c:            ngx_log_error(NGX_LOG_ALERT, cycle->log, err,
+src/os/unix/ngx_process_cycle.c:        ngx_log_debug7(NGX_LOG_DEBUG_EVENT, cycle->log, 0,
+src/os/unix/ngx_process_cycle.c:                ngx_close_channel(ngx_processes[i].channel, cycle->log);
+src/os/unix/ngx_process_cycle.c:                    ngx_log_debug3(NGX_LOG_DEBUG_CORE, cycle->log, 0,
+src/os/unix/ngx_process_cycle.c:                                      &ch, sizeof(ngx_channel_t), cycle->log);
+src/os/unix/ngx_process_cycle.c:                    ngx_log_error(NGX_LOG_ALERT, cycle->log, 0,
+src/os/unix/ngx_process_cycle.c:                ccf = (ngx_core_conf_t *) ngx_get_conf(cycle->conf_ctx,
+src/os/unix/ngx_process_cycle.c:                    ngx_log_error(NGX_LOG_ALERT, cycle->log, ngx_errno,
+src/os/unix/ngx_process_cycle.c:    ngx_log_error(NGX_LOG_NOTICE, cycle->log, 0, "exit");
+src/os/unix/ngx_process_cycle.c:    for (i = 0; cycle->modules[i]; i++) {
+src/os/unix/ngx_process_cycle.c:        if (cycle->modules[i]->exit_master) {
+src/os/unix/ngx_process_cycle.c:            cycle->modules[i]->exit_master(cycle);
+src/os/unix/ngx_process_cycle.c:     * Copy ngx_cycle->log related data to the special static exit cycle,
+src/os/unix/ngx_process_cycle.c:     * The handler may be called when standard ngx_cycle->log allocated from
+src/os/unix/ngx_process_cycle.c:     * ngx_cycle->pool is already destroyed.
+src/os/unix/ngx_process_cycle.c:    ngx_exit_log = *ngx_log_get_file_log(ngx_cycle->log);
+src/os/unix/ngx_process_cycle.c:    ngx_exit_cycle.files = ngx_cycle->files;
+src/os/unix/ngx_process_cycle.c:    ngx_exit_cycle.files_n = ngx_cycle->files_n;
+src/os/unix/ngx_process_cycle.c:    ngx_destroy_pool(cycle->pool);
+src/os/unix/ngx_process_cycle.c:                ngx_log_error(NGX_LOG_NOTICE, cycle->log, 0, "exiting");
+src/os/unix/ngx_process_cycle.c:        ngx_log_debug0(NGX_LOG_DEBUG_EVENT, cycle->log, 0, "worker cycle");
+src/os/unix/ngx_process_cycle.c:            ngx_log_error(NGX_LOG_NOTICE, cycle->log, 0, "exiting");
+src/os/unix/ngx_process_cycle.c:            ngx_log_error(NGX_LOG_NOTICE, cycle->log, 0,
+src/os/unix/ngx_process_cycle.c:            ngx_log_error(NGX_LOG_NOTICE, cycle->log, 0, "reopening logs");
+src/os/unix/ngx_process_cycle.c:    ccf = (ngx_core_conf_t *) ngx_get_conf(cycle->conf_ctx, ngx_core_module);
+src/os/unix/ngx_process_cycle.c:            ngx_log_error(NGX_LOG_ALERT, cycle->log, ngx_errno,
+src/os/unix/ngx_process_cycle.c:            ngx_log_error(NGX_LOG_ALERT, cycle->log, ngx_errno,
+src/os/unix/ngx_process_cycle.c:            ngx_log_error(NGX_LOG_ALERT, cycle->log, ngx_errno,
+src/os/unix/ngx_process_cycle.c:            ngx_log_error(NGX_LOG_EMERG, cycle->log, ngx_errno,
+src/os/unix/ngx_process_cycle.c:            ngx_log_error(NGX_LOG_EMERG, cycle->log, ngx_errno,
+src/os/unix/ngx_process_cycle.c:                ngx_log_error(NGX_LOG_EMERG, cycle->log, ngx_errno,
+src/os/unix/ngx_process_cycle.c:            ngx_log_error(NGX_LOG_EMERG, cycle->log, ngx_errno,
+src/os/unix/ngx_process_cycle.c:                ngx_log_error(NGX_LOG_EMERG, cycle->log, ngx_errno,
+src/os/unix/ngx_process_cycle.c:            ngx_setaffinity(cpu_affinity, cycle->log);
+src/os/unix/ngx_process_cycle.c:        ngx_log_error(NGX_LOG_ALERT, cycle->log, ngx_errno,
+src/os/unix/ngx_process_cycle.c:            ngx_log_error(NGX_LOG_ALERT, cycle->log, ngx_errno,
+src/os/unix/ngx_process_cycle.c:        ngx_log_error(NGX_LOG_ALERT, cycle->log, ngx_errno,
+src/os/unix/ngx_process_cycle.c:    ls = cycle->listening.elts;
+src/os/unix/ngx_process_cycle.c:    for (i = 0; i < cycle->listening.nelts; i++) {
+src/os/unix/ngx_process_cycle.c:    for (i = 0; cycle->modules[i]; i++) {
+src/os/unix/ngx_process_cycle.c:        if (cycle->modules[i]->init_process) {
+src/os/unix/ngx_process_cycle.c:            if (cycle->modules[i]->init_process(cycle) == NGX_ERROR) {
+src/os/unix/ngx_process_cycle.c:            ngx_log_error(NGX_LOG_ALERT, cycle->log, ngx_errno,
+src/os/unix/ngx_process_cycle.c:        ngx_log_error(NGX_LOG_ALERT, cycle->log, ngx_errno,
+src/os/unix/ngx_process_cycle.c:    for (i = 0; cycle->modules[i]; i++) {
+src/os/unix/ngx_process_cycle.c:        if (cycle->modules[i]->exit_process) {
+src/os/unix/ngx_process_cycle.c:            cycle->modules[i]->exit_process(cycle);
+src/os/unix/ngx_process_cycle.c:        c = cycle->connections;
+src/os/unix/ngx_process_cycle.c:        for (i = 0; i < cycle->connection_n; i++) {
+src/os/unix/ngx_process_cycle.c:                ngx_log_error(NGX_LOG_ALERT, cycle->log, 0,
+src/os/unix/ngx_process_cycle.c:            ngx_log_error(NGX_LOG_ALERT, cycle->log, 0, "aborting");
+src/os/unix/ngx_process_cycle.c:     * Copy ngx_cycle->log related data to the special static exit cycle,
+src/os/unix/ngx_process_cycle.c:     * The handler may be called when standard ngx_cycle->log allocated from
+src/os/unix/ngx_process_cycle.c:     * ngx_cycle->pool is already destroyed.
+src/os/unix/ngx_process_cycle.c:    ngx_exit_log = *ngx_log_get_file_log(ngx_cycle->log);
+src/os/unix/ngx_process_cycle.c:    ngx_exit_cycle.files = ngx_cycle->files;
+src/os/unix/ngx_process_cycle.c:    ngx_exit_cycle.files_n = ngx_cycle->files_n;
+src/os/unix/ngx_process_cycle.c:    ngx_destroy_pool(cycle->pool);
+src/os/unix/ngx_process_cycle.c:    ngx_log_error(NGX_LOG_NOTICE, ngx_cycle->log, 0, "exit");
+src/os/unix/ngx_process_cycle.c:    cycle->connection_n = 512;
+src/os/unix/ngx_process_cycle.c:    ev.log = cycle->log;
+src/os/unix/ngx_process_cycle.c:            ngx_log_error(NGX_LOG_NOTICE, cycle->log, 0, "exiting");
+src/os/unix/ngx_process_cycle.c:            ngx_log_error(NGX_LOG_NOTICE, cycle->log, 0, "reopening logs");
+src/os/unix/ngx_process_cycle.c:    path = ngx_cycle->paths.elts;
+src/os/unix/ngx_process_cycle.c:    for (i = 0; i < ngx_cycle->paths.nelts; i++) {
+src/os/unix/ngx_process_cycle.c:    path = cycle->paths.elts;
+src/os/unix/ngx_process_cycle.c:    for (i = 0; i < cycle->paths.nelts; i++) {
+src/os/unix/ngx_setproctitle.c:    ngx_log_debug1(NGX_LOG_DEBUG_CORE, ngx_cycle->log, 0,
+src/os/win32/ngx_process.c:            ngx_log_error(NGX_LOG_ALERT, cycle->log, 0,
+src/os/win32/ngx_process.c:        ngx_log_error(NGX_LOG_ALERT, cycle->log, ngx_errno,
+src/os/win32/ngx_process.c:    ngx_log_debug1(NGX_LOG_DEBUG_CORE, cycle->log, 0,
+src/os/win32/ngx_process.c:    ngx_log_debug1(NGX_LOG_DEBUG_CORE, cycle->log, 0,
+src/os/win32/ngx_process.c:            ngx_log_error(NGX_LOG_ALERT, cycle->log, ngx_errno,
+src/os/win32/ngx_process.c:            ngx_log_error(NGX_LOG_ALERT, cycle->log, ngx_errno,
+src/os/win32/ngx_process.c:            ngx_log_error(NGX_LOG_ALERT, cycle->log, ngx_errno,
+src/os/win32/ngx_process.c:            ngx_log_error(NGX_LOG_ALERT, cycle->log, 0,
+src/os/win32/ngx_process.c:            ngx_log_error(NGX_LOG_ALERT, cycle->log, ngx_errno,
+src/os/win32/ngx_process.c:        ngx_log_error(NGX_LOG_ALERT, cycle->log, 0,
+src/os/win32/ngx_process.c:        ngx_log_error(NGX_LOG_ALERT, cycle->log, 0,
+src/os/win32/ngx_process.c:        ngx_log_error(NGX_LOG_ALERT, cycle->log, ngx_errno,
+src/os/win32/ngx_process.c:        ngx_log_error(NGX_LOG_CRIT, cycle->log, ngx_errno,
+src/os/win32/ngx_process.c:        ngx_log_error(NGX_LOG_ALERT, cycle->log, ngx_errno,
+src/os/win32/ngx_process.c:    ngx_log_error(NGX_LOG_NOTICE, cycle->log, 0,
+src/os/win32/ngx_process_cycle.c:    ngx_log_debug0(NGX_LOG_DEBUG_CORE, cycle->log, 0, "master started");
+src/os/win32/ngx_process_cycle.c:        ngx_log_error(NGX_LOG_ALERT, cycle->log, ngx_errno,
+src/os/win32/ngx_process_cycle.c:        ngx_log_error(NGX_LOG_ALERT, cycle->log, ngx_errno,
+src/os/win32/ngx_process_cycle.c:        ngx_log_debug1(NGX_LOG_DEBUG_CORE, cycle->log, 0,
+src/os/win32/ngx_process_cycle.c:            ngx_log_error(NGX_LOG_NOTICE, cycle->log, 0, "exiting");
+src/os/win32/ngx_process_cycle.c:                ngx_log_error(NGX_LOG_ALERT, cycle->log, 0,
+src/os/win32/ngx_process_cycle.c:            ngx_log_error(NGX_LOG_NOTICE, cycle->log, 0, "shutting down");
+src/os/win32/ngx_process_cycle.c:                ngx_log_error(NGX_LOG_ALERT, cycle->log, 0,
+src/os/win32/ngx_process_cycle.c:            ngx_log_error(NGX_LOG_NOTICE, cycle->log, 0, "reopening logs");
+src/os/win32/ngx_process_cycle.c:                ngx_log_error(NGX_LOG_ALERT, cycle->log, 0,
+src/os/win32/ngx_process_cycle.c:            ngx_log_error(NGX_LOG_NOTICE, cycle->log, 0, "reconfiguring");
+src/os/win32/ngx_process_cycle.c:                ngx_log_error(NGX_LOG_ALERT, cycle->log, 0,
+src/os/win32/ngx_process_cycle.c:            ngx_log_debug0(NGX_LOG_DEBUG_CORE, cycle->log, 0, "reap worker");
+src/os/win32/ngx_process_cycle.c:            ngx_log_error(NGX_LOG_ALERT, cycle->log, err,
+src/os/win32/ngx_process_cycle.c:        ngx_log_error(NGX_LOG_ALERT, cycle->log, 0,
+src/os/win32/ngx_process_cycle.c:    ccf = (ngx_core_conf_t *) ngx_get_conf(cycle->conf_ctx, ngx_core_module);
+src/os/win32/ngx_process_cycle.c:            ngx_log_error(NGX_LOG_ALERT, cycle->log, ngx_errno,
+src/os/win32/ngx_process_cycle.c:        ngx_log_error(NGX_LOG_ALERT, cycle->log, ngx_errno,
+src/os/win32/ngx_process_cycle.c:    ngx_log_error(NGX_LOG_NOTICE, ngx_cycle->log, 0, msg);
+src/os/win32/ngx_process_cycle.c:        ngx_log_error(NGX_LOG_ALERT, ngx_cycle->log, 0,
+src/os/win32/ngx_process_cycle.c:        ngx_log_error(NGX_LOG_ALERT, cycle->log, ngx_errno,
+src/os/win32/ngx_process_cycle.c:        ngx_log_error(NGX_LOG_ALERT, cycle->log, ngx_errno,
+src/os/win32/ngx_process_cycle.c:        ngx_log_error(NGX_LOG_ALERT, cycle->log, ngx_errno,
+src/os/win32/ngx_process_cycle.c:        ngx_log_error(NGX_LOG_ALERT, cycle->log, ngx_errno,
+src/os/win32/ngx_process_cycle.c:    ngx_log_error(NGX_LOG_NOTICE, cycle->log, 0, "start worker processes");
+src/os/win32/ngx_process_cycle.c:    ccf = (ngx_core_conf_t *) ngx_get_conf(cycle->conf_ctx, ngx_core_module);
+src/os/win32/ngx_process_cycle.c:            ngx_log_error(NGX_LOG_ALERT, cycle->log, ngx_errno,
+src/os/win32/ngx_process_cycle.c:        ngx_log_debug5(NGX_LOG_DEBUG_CORE, cycle->log, 0,
+src/os/win32/ngx_process_cycle.c:            ngx_log_error(NGX_LOG_ALERT, cycle->log, ngx_errno,
+src/os/win32/ngx_process_cycle.c:            ngx_log_error(NGX_LOG_ALERT, cycle->log, ngx_errno,
+src/os/win32/ngx_process_cycle.c:            ngx_log_error(NGX_LOG_ALERT, cycle->log, ngx_errno,
+src/os/win32/ngx_process_cycle.c:        ngx_log_error(NGX_LOG_NOTICE, cycle->log, 0,
+src/os/win32/ngx_process_cycle.c:                ngx_log_error(NGX_LOG_ALERT, cycle->log, 0,
+src/os/win32/ngx_process_cycle.c:    ngx_log_error(NGX_LOG_ALERT, cycle->log, 0, "unknown process handle %p", h);
+src/os/win32/ngx_process_cycle.c:        ngx_log_debug5(NGX_LOG_DEBUG_CORE, cycle->log, 0,
+src/os/win32/ngx_process_cycle.c:    ngx_log_error(NGX_LOG_NOTICE, cycle->log, 0, "exit");
+src/os/win32/ngx_process_cycle.c:    for (i = 0; cycle->modules[i]; i++) {
+src/os/win32/ngx_process_cycle.c:        if (cycle->modules[i]->exit_master) {
+src/os/win32/ngx_process_cycle.c:            cycle->modules[i]->exit_master(cycle);
+src/os/win32/ngx_process_cycle.c:    ngx_destroy_pool(cycle->pool);
+src/os/win32/ngx_process_cycle.c:    log = cycle->log;
+src/os/win32/ngx_process_cycle.c:        ngx_log_error(NGX_LOG_ALERT, cycle->log, ngx_errno,
+src/os/win32/ngx_process_cycle.c:    for (n = 0; cycle->modules[n]; n++) {
+src/os/win32/ngx_process_cycle.c:        if (cycle->modules[n]->init_process) {
+src/os/win32/ngx_process_cycle.c:            if (cycle->modules[n]->init_process(cycle) == NGX_ERROR) {
+src/os/win32/ngx_process_cycle.c:        ngx_log_debug0(NGX_LOG_DEBUG_CORE, cycle->log, 0, "worker cycle");
+src/os/win32/ngx_process_cycle.c:    ngx_log_error(NGX_LOG_NOTICE, cycle->log, 0, "exiting");
+src/os/win32/ngx_process_cycle.c:    ngx_log_error(NGX_LOG_NOTICE, cycle->log, 0, "exit");
+src/os/win32/ngx_process_cycle.c:    for (i = 0; cycle->modules[i]; i++) {
+src/os/win32/ngx_process_cycle.c:        if (cycle->modules[i]->exit_process) {
+src/os/win32/ngx_process_cycle.c:            cycle->modules[i]->exit_process(cycle);
+src/os/win32/ngx_process_cycle.c:        c = cycle->connections;
+src/os/win32/ngx_process_cycle.c:        for (i = 0; i < cycle->connection_n; i++) {
+src/os/win32/ngx_process_cycle.c:                ngx_log_error(NGX_LOG_ALERT, cycle->log, 0,
+src/os/win32/ngx_process_cycle.c:    ngx_destroy_pool(cycle->pool);
+src/os/win32/ngx_process_cycle.c:        ngx_log_debug1(NGX_LOG_DEBUG_CORE, cycle->log, 0,
+src/os/win32/ngx_process_cycle.c:            ngx_log_error(NGX_LOG_ALERT, cycle->log, err,
+src/os/win32/ngx_process_cycle.c:            ngx_log_error(NGX_LOG_NOTICE, cycle->log, 0, "exiting");
+src/os/win32/ngx_process_cycle.c:            ngx_log_error(NGX_LOG_NOTICE, cycle->log, 0, "exiting");
+src/os/win32/ngx_process_cycle.c:        ngx_log_error(NGX_LOG_ALERT, cycle->log, ngx_errno,
+src/os/win32/ngx_process_cycle.c:    path = ngx_cycle->paths.elts;
+src/os/win32/ngx_process_cycle.c:    for (i = 0; i < ngx_cycle->paths.nelts; i++) {
+src/os/win32/ngx_process_cycle.c:        ngx_log_debug1(NGX_LOG_DEBUG_CORE, ngx_cycle->log, 0,
+src/os/win32/ngx_process_cycle.c:    path = cycle->paths.elts;
+src/os/win32/ngx_process_cycle.c:    for (i = 0; i < cycle->paths.nelts; i++) {
+src/os/win32/ngx_process_cycle.c:    if (ngx_create_thread(&tid, ngx_worker_thread, NULL, cycle->log) != 0) {
+src/os/win32/ngx_process_cycle.c:        ngx_log_error(NGX_LOG_ERR, cycle->log, ngx_errno,
+src/os/win32/ngx_process_cycle.c:        ngx_log_error(NGX_LOG_ALERT, cycle->log, ngx_errno,
+src/os/win32/ngx_process_cycle.c:        ngx_log_error(NGX_LOG_ALERT, ngx_cycle->log, ngx_errno,
+src/stream/ngx_stream.c:    for (m = 0; cf->cycle->modules[m]; m++) {
+src/stream/ngx_stream.c:        if (cf->cycle->modules[m]->type != NGX_STREAM_MODULE) {
+src/stream/ngx_stream.c:        module = cf->cycle->modules[m]->ctx;
+src/stream/ngx_stream.c:        mi = cf->cycle->modules[m]->ctx_index;
+src/stream/ngx_stream.c:    for (m = 0; cf->cycle->modules[m]; m++) {
+src/stream/ngx_stream.c:        if (cf->cycle->modules[m]->type != NGX_STREAM_MODULE) {
+src/stream/ngx_stream.c:        module = cf->cycle->modules[m]->ctx;
+src/stream/ngx_stream.c:    for (m = 0; cf->cycle->modules[m]; m++) {
+src/stream/ngx_stream.c:        if (cf->cycle->modules[m]->type != NGX_STREAM_MODULE) {
+src/stream/ngx_stream.c:        module = cf->cycle->modules[m]->ctx;
+src/stream/ngx_stream.c:        mi = cf->cycle->modules[m]->ctx_index;
+src/stream/ngx_stream.c:    for (m = 0; cf->cycle->modules[m]; m++) {
+src/stream/ngx_stream.c:        if (cf->cycle->modules[m]->type != NGX_STREAM_MODULE) {
+src/stream/ngx_stream.c:        module = cf->cycle->modules[m]->ctx;
+src/stream/ngx_stream.h:    (cycle->conf_ctx[ngx_stream_module.index] ?                                \
+src/stream/ngx_stream.h:        ((ngx_stream_conf_ctx_t *) cycle->conf_ctx[ngx_stream_module.index])   \
+src/stream/ngx_stream_core_module.c:            conf->error_log = &cf->cycle->new_log;
+src/stream/ngx_stream_core_module.c:    for (m = 0; cf->cycle->modules[m]; m++) {
+src/stream/ngx_stream_core_module.c:        if (cf->cycle->modules[m]->type != NGX_STREAM_MODULE) {
+src/stream/ngx_stream_core_module.c:        module = cf->cycle->modules[m]->ctx;
+src/stream/ngx_stream_core_module.c:            ctx->srv_conf[cf->cycle->modules[m]->ctx_index] = mconf;
+src/stream/ngx_stream_log_module.c:                   + ngx_cycle->hostname.len + 1
+src/stream/ngx_stream_log_module.c:            buffer->event->log = &cf->cycle->new_log;
+src/stream/ngx_stream_proxy_module.c:            ccf = (ngx_core_conf_t *) ngx_get_conf(cf->cycle->conf_ctx,
+src/stream/ngx_stream_script.c:    return code->conf_prefix ? ngx_cycle->conf_prefix.len:
+src/stream/ngx_stream_script.c:                               ngx_cycle->prefix.len;
+src/stream/ngx_stream_script.c:    prefix = code->conf_prefix ? (ngx_str_t *) &ngx_cycle->conf_prefix:
+src/stream/ngx_stream_script.c:                                 (ngx_str_t *) &ngx_cycle->prefix;
+src/stream/ngx_stream_upstream.c:    for (m = 0; cf->cycle->modules[m]; m++) {
+src/stream/ngx_stream_upstream.c:        if (cf->cycle->modules[m]->type != NGX_STREAM_MODULE) {
+src/stream/ngx_stream_upstream.c:        module = cf->cycle->modules[m]->ctx;
+src/stream/ngx_stream_upstream.c:            ctx->srv_conf[cf->cycle->modules[m]->ctx_index] = mconf;
+src/stream/ngx_stream_upstream_random_module.c:    ranges = pool ? ngx_palloc(pool, size) : ngx_alloc(size, ngx_cycle->log);
+src/stream/ngx_stream_variables.c:    v->len = ngx_cycle->hostname.len;
+src/stream/ngx_stream_variables.c:    v->data = ngx_cycle->hostname.data;
