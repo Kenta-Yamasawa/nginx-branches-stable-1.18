@@ -54,6 +54,7 @@ ngx_writev_chain(ngx_connection_t *c, ngx_chain_t *in, off_t limit)
     vec.nalloc = NGX_IOVS_PREALLOCATE;
 
     for ( ;; ) {
+        // これまでに送信バッファへ送ったバイト量
         prev_send = send;
 
         /* create the iovec and coalesce the neighbouring bufs */
@@ -102,6 +103,7 @@ ngx_writev_chain(ngx_connection_t *c, ngx_chain_t *in, off_t limit)
             return NGX_CHAIN_ERROR;
         }
 
+        // この直後の ngx_writev() 呼び出し成功時、これまでに送信バッファへ書き込んだと思われるバイト量
         send += vec.size;
 
         n = ngx_writev(c, &vec);
@@ -127,9 +129,11 @@ ngx_writev_chain(ngx_connection_t *c, ngx_chain_t *in, off_t limit)
          */
         in = ngx_chain_update_sent(in, sent);
 
-        // 今回、全く送信できなかった
+        // 今回、すべてを送信バッファ側へ移せなかった
         if (send - prev_send != sent) {
+            // 送信イベントの準備ができていないことにする
             wev->ready = 0;
+            // 残りのチェインバッファを返す
             return in;
         }
 
@@ -247,6 +251,22 @@ ngx_output_chain_to_iovec(ngx_iovec_t *vec, ngx_chain_t *in, size_t limit,
 }
 
 
+/**
+ * @brief
+ *     iovs に書き込まれているデータをすべて送信する
+ * @param[in]
+ *     c: 使用するコネクション
+ *     vec: 送信したいデータ
+ * @retval
+ *     n: 送信したバイト量（成功）
+ *     NGX_ERROR: エラー終了１
+ *     NGX_EAGAIN: エラー終了２
+ * @detail
+ *     writev() を呼び出して成功した（一部 or 全て）場合は、送信バッファに送ったバイト量を返す
+ *     writev() を呼び出して、NGX_EINTR  だった場合は、処理を繰り返す
+ *     writev() を呼び出して、NGX_ERROR  だった場合は、NGX_ERROR を返す
+ *     writev() を呼び出して、NGX_EAGAIN だった場合は、NGX_AGAIN を返す
+ */
 ssize_t
 ngx_writev(ngx_connection_t *c, ngx_iovec_t *vec)
 {

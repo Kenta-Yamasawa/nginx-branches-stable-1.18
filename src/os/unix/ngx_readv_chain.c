@@ -10,6 +10,28 @@
 #include <ngx_event.h>
 
 
+/**
+ * @brief
+ *     バッファチェインリストが保有するすべてのバッファが一杯になるまで受信することを試みる
+ *     ただし、limit バイト以上は受信しない
+ *     ただし、IOV_MAX までしかバッファチェインを使用しない（それ以上は無視）
+ * @param[in]
+ *     c: コネクション
+ *     chain: 受信に使用するバッファチェインリスト
+ *     limit: 限界受信バイト量
+ * @retval
+ *     n: 受信バイト量
+ *     0: これ以上、受信できない
+ *     NGX_ERROR: エラー終了1
+ *     NGX_AGAIN: エラー終了2
+ * @detail
+ *     readv() に成功して、すべてを受信した（バッファ一杯 or limit バイト）ら、受信したバイト量を返す
+ *     readv() に成功したが、すべてを受信できなかったら ready フラグを 0 に、受信したバイト量を返す
+ *     readv() を呼び出して、これ以上、読み出せないときは ready フラグを 0 に、eof フラグを 1 にして 0 を返す
+ *     readv() を呼び出して E_INTR が返るたびに処理を繰り返す
+ *     readv() を呼び出して E_AGAIN が返ったら ready フラグを 0 に、NGX_AGAIN を返す
+ *     readv() を呼び出して E_ERROR が返ったら ready フラグを 0 に、error フラグを 1 にして NGX_ERROR を返す
+ */
 ssize_t
 ngx_readv_chain(ngx_connection_t *c, ngx_chain_t *chain, off_t limit)
 {
@@ -20,6 +42,7 @@ ngx_readv_chain(ngx_connection_t *c, ngx_chain_t *chain, off_t limit)
     ngx_event_t   *rev;
     struct iovec  *iov, iovs[NGX_IOVS_PREALLOCATE];
 
+    // このコネクションの受信イベントを取得する
     rev = c->read;
 
 #if (NGX_HAVE_KQUEUE)
@@ -74,24 +97,30 @@ ngx_readv_chain(ngx_connection_t *c, ngx_chain_t *chain, off_t limit)
     vec.elts = iovs;
     vec.nelts = 0;
     vec.size = sizeof(struct iovec);
-    vec.nalloc = NGX_IOVS_PREALLOCATE;
+    vec.nalloc = NGX_IOVS_PREALLOCATE; // IOV_MAX と基本的には同じ
     vec.pool = c->pool;
 
     /* coalesce the neighbouring bufs */
 
+    // バッファチェインリストの先頭バッファチェインから参照していく
     while (chain) {
+        // n をこのバッファチェインからの受信容量に設定する
         n = chain->buf->end - chain->buf->last;
 
         if (limit) {
+            // 受信限界量を超過したらループを抜ける
             if (size >= limit) {
+                // これ以上は受信できない
                 break;
             }
 
+            // 受信限界量的に、すべてを受信できないなら、n を限界量に設定する
             if (size + n > limit) {
                 n = (ssize_t) (limit - size);
             }
         }
 
+        // ここは？
         if (prev == chain->buf->last) {
             iov->iov_len += n;
 
@@ -105,12 +134,16 @@ ngx_readv_chain(ngx_connection_t *c, ngx_chain_t *chain, off_t limit)
                 return NGX_ERROR;
             }
 
+            // iov へ移す
             iov->iov_base = (void *) chain->buf->last;
             iov->iov_len = n;
         }
 
+        // 合計の受信量を更新
         size += n;
+        // 
         prev = chain->buf->end;
+        // 次のバッファチェインへ
         chain = chain->next;
     }
 
@@ -217,13 +250,16 @@ ngx_readv_chain(ngx_connection_t *c, ngx_chain_t *chain, off_t limit)
 
 #endif
 
+            // すべてを受信バッファから受け取れなかった時は、受信イベントの ready フラグを 0 に
             if (n < size && !(ngx_event_flags & NGX_USE_GREEDY_EVENT)) {
                 rev->ready = 0;
             }
 
+            // 受信した合計バイト量を受信する
             return n;
         }
 
+        // エラー番号を取得
         err = ngx_socket_errno;
 
         if (err == NGX_EAGAIN || err == NGX_EINTR) {

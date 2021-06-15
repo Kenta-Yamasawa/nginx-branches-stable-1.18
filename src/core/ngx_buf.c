@@ -11,7 +11,7 @@
 
 /**
  * @brief
- *     バッファを生成して返す
+ *     一時バッファを生成して返す
  * @param[in]
  *     pool: このプールを用いてバッファを生成する
  *     size: このバッファが保有するメモリ容量のサイズ
@@ -24,7 +24,7 @@ ngx_create_temp_buf(ngx_pool_t *pool, size_t size)
 {
     ngx_buf_t *b;
 
-    // 
+    // ngx_pcalloc() : 0 で埋める
     b = ngx_calloc_buf(pool);
     if (b == NULL) {
         return NULL;

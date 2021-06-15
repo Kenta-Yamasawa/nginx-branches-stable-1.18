@@ -41,6 +41,7 @@ struct ngx_buf_s {
 
 
     /* the buf's content could be changed */
+    // 一時バッファであることを表す
     unsigned         temporary:1;
 
     /*
@@ -162,11 +163,14 @@ typedef struct {
     (ngx_buf_in_memory(b) ? (off_t) (b->last - b->pos):                      \
                             (b->file_last - b->file_pos))
 
+// バッファヘッダを生成する
 ngx_buf_t *ngx_create_temp_buf(ngx_pool_t *pool, size_t size);
 ngx_chain_t *ngx_create_chain_of_bufs(ngx_pool_t *pool, ngx_bufs_t *bufs);
 
 
+// 新しいバッファを生成する
 #define ngx_alloc_buf(pool)  ngx_palloc(pool, sizeof(ngx_buf_t))
+// 新しいバッファを生成して 0 で初期化する
 #define ngx_calloc_buf(pool) ngx_pcalloc(pool, sizeof(ngx_buf_t))
 
 ngx_chain_t *ngx_alloc_chain_link(ngx_pool_t *pool);
